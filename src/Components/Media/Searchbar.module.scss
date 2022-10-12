@@ -1,0 +1,22 @@
+$height: 40px;
+$width: 80%;
+$fontSize: 1.35rem;
+
+.searchbar {
+  height: $height;
+  width: $width;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  color: whitesmoke;
+  font-size: $fontSize;
+  align-items: center;
+}
+
+.input {
+  width: 90%;
+  background: inherit;
+  &:focus-visible {
+    outline: none;
+  }
+}

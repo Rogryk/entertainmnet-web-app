@@ -1,0 +1,81 @@
+//all
+$imageBorderRadius: 8px;
+
+// trending
+$picHeight: 150px;
+$picWidth: 320px;
+$titleFontSize: 1rem;
+$titleFontWeight: 600;
+$descFontSize: 0.65rem;
+$descFontWeight: 300;
+$descFontColor: rgba(255, 255, 255, 0.75);
+
+.element {
+  position: relative;
+  width: $picWidth;
+  min-width: $picWidth;
+}
+
+img {
+  height: $picHeight;
+  width: $picWidth;
+  border-radius: $imageBorderRadius;
+  object-fit: cover;
+}
+
+.bookmark {
+  position: absolute;
+  top: 6%;
+  right: 4%;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+
+  .bookmarkIcon {
+    height: 17px;
+    width: 17px;
+    margin: auto;
+  }
+}
+
+.description {
+  position: absolute;
+  bottom: 0.4rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  color: white;
+
+  .info {
+    display: inline-flex;
+    color: $descFontColor;
+    font-size: $descFontSize;
+    font-weight: $descFontWeight;
+    li {
+      display: inline-flex;
+      &::before {
+        content: "•";
+        margin-right: 5px;
+        margin-left: 5px;
+      }
+      &:first-child::before {
+        content: "";
+        margin: 0px;
+      }
+    }
+  }
+  .info_category {
+    display: inline-flex;
+    align-items: center;
+    svg {
+      height: $descFontSize;
+      width: $descFontSize;
+    }
+  }
+  h3 {
+    font-size: $titleFontSize;
+    font-weight: $titleFontWeight;
+  }
+}

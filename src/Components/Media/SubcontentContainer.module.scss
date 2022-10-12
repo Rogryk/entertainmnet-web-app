@@ -1,0 +1,33 @@
+$height: 200px;
+
+.wrapper {
+  // border: 1px solid red;
+  height: $height;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h2 {
+    display: block;
+    width: 100%;
+    font-size: 1.5rem;
+  }
+}
+
+.subcontentContainer {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  div {
+    margin-right: 30px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.subcontentContainer:last-child {
+  margin-right: 0;
+}

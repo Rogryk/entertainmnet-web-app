@@ -1,0 +1,14 @@
+$height: calc(100% - 40px - 20px);
+$width: 100%;
+
+.contentContainer {
+  border: 1px solid white;
+  height: $height;
+  width: $width;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  color: white;
+}

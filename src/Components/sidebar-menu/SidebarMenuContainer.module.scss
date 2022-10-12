@@ -1,0 +1,44 @@
+@import "../../layout/mixins";
+
+$marginTop: 5vh;
+$sidebarWidth: 70px;
+$sidebarHeight: 90vh;
+$sidebarBgColor: rgb(22, 29, 47);
+$buttonColor: rgba(248, 253, 254, 0.5);
+$homeButtonColor: rgba(254, 69, 75, 0.75);
+
+.sidebarMenuContainer {
+  position: fixed;
+  top: $marginTop;
+  margin: 0 1.85rem;
+  padding: 20px;
+  border-radius: 14px;
+  width: $sidebarWidth;
+  height: $sidebarHeight;
+  background: $sidebarBgColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.submenuContainer {
+  position: absolute;
+  top: 10%;
+  @include absCenterHorizontally;
+  display: flex;
+  flex-direction: column;
+  button {
+    @include flexCenter;
+    color: $buttonColor;
+    margin: 10px 0;
+  }
+}
+
+.homeBtn {
+  color: $homeButtonColor;
+}
+
+.userBtn {
+  margin: 0 auto;
+  color: $buttonColor;
+}

@@ -1,0 +1,16 @@
+@mixin absCenterVertically {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@mixin absCenterHorizontally {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
