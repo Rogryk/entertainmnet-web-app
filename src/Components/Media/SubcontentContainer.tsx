@@ -3,8 +3,8 @@ import Element from "./Element";
 import styles from "./SubcontentContainer.module.scss";
 
 interface ISubcontentContainer {
-  style: "long" | "short";
   title: string;
+  theme?: "short" | "long";
 }
 
 const DUMMY_DATA = {
@@ -29,24 +29,71 @@ const DUMMY_DATA = {
 };
 
 const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
+  const theme = props.theme ? "theme_" + props.theme : "theme_short";
+
   return (
     <div className={styles.wrapper}>
       <h2>{props.title}</h2>
-      <div className={styles.subcontentContainer}>
+      <div className={`${styles.subcontentContainer} ${styles[theme]}`}>
         {/* TODO: Change image path */}
         <Element
+          theme={props.theme}
           image={
             process.env.PUBLIC_URL +
             "thumbnails/beyond-earth/trending/small.jpg"
           }
         />
         <Element
+          theme={props.theme}
           image={
             process.env.PUBLIC_URL +
             "thumbnails/beyond-earth/trending/small.jpg"
           }
         />
         <Element
+          theme={props.theme}
+          image={
+            process.env.PUBLIC_URL +
+            "thumbnails/beyond-earth/trending/small.jpg"
+          }
+        />
+        <Element
+          theme={props.theme}
+          image={
+            process.env.PUBLIC_URL +
+            "thumbnails/beyond-earth/trending/small.jpg"
+          }
+        />
+        <Element
+          theme={props.theme}
+          image={
+            process.env.PUBLIC_URL +
+            "thumbnails/beyond-earth/trending/small.jpg"
+          }
+        />
+        <Element
+          theme={props.theme}
+          image={
+            process.env.PUBLIC_URL +
+            "thumbnails/beyond-earth/trending/small.jpg"
+          }
+        />
+        <Element
+          theme={props.theme}
+          image={
+            process.env.PUBLIC_URL +
+            "thumbnails/beyond-earth/trending/small.jpg"
+          }
+        />
+        <Element
+          theme={props.theme}
+          image={
+            process.env.PUBLIC_URL +
+            "thumbnails/beyond-earth/trending/small.jpg"
+          }
+        />
+        <Element
+          theme={props.theme}
           image={
             process.env.PUBLIC_URL +
             "thumbnails/beyond-earth/trending/small.jpg"

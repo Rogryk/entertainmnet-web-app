@@ -6,7 +6,7 @@ $mediaContainerWidth: calc(100vw - 150px);
   float: right;
   justify-self: end;
   background: transparent;
-  height: 110vh;
+  height: fit-content;
   width: $mediaContainerWidth;
   // border: 1px solid red;
   display: flex;
