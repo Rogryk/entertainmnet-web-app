@@ -1,11 +1,6 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHouse,
-  faCircleUser,
-  faBookmark,
-  faMobileRetro,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import {
   IconDeviceTvOld,
   IconMovie,
@@ -13,32 +8,66 @@ import {
   IconUserCircle,
   IconLayoutGrid,
 } from "@tabler/icons";
-import "../../index.scss";
+import MenuContext from "../../store/menu-context";
 import styles from "./SidebarMenuContainer.module.scss";
 
-const SidebarMenuContainer = () => {
+interface ISidebarMenuContainer {
+  isSidebarMenuHidden: boolean;
+  setIsSidebarMenuHidden: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
+  const menuCtx = useContext(MenuContext);
+
+  const hideSidebarHandler = () => {
+    props.setIsSidebarMenuHidden((prev) => !prev);
+  };
+
   return (
-    // <div className="fixed top-10 left-10 rounded-2xl w-20 h-5/6 bg-gray-400 ">
-    <div className={styles.sidebarMenuContainer}>
-      <button type="submit" className={styles.homeBtn}>
+    <div
+      className={`${styles.sidebarMenuContainer} ${
+        props.isSidebarMenuHidden ? styles.hidden : ""
+      }`}
+    >
+      <button
+        type="submit"
+        className={styles.homeBtn}
+        onClick={() => menuCtx.setMenuState("home")}
+      >
         <FontAwesomeIcon icon={faHouse} size="lg" />
       </button>
       <div className={styles.submenuContainer}>
-        <button type="submit">
-          <IconLayoutGrid stroke={2} />
+        <button
+          type="submit"
+          onClick={() => menuCtx.setMenuState("categories")}
+        >
+          <IconLayoutGrid stroke={2} className={styles.iconColor} />
         </button>
-        <button type="submit">
-          <IconDeviceTvOld stroke={2} />
+        <button type="submit" onClick={() => menuCtx.setMenuState("tvseries")}>
+          <IconDeviceTvOld stroke={2} className={styles.iconColor} />
         </button>
-        <button type="submit">
-          <IconMovie stroke={2} />
+        <button type="submit" onClick={() => menuCtx.setMenuState("movies")}>
+          <IconMovie stroke={2} className={styles.iconColor} />
         </button>
-        <button type="submit">
-          <IconBookmark stroke={2} />
+
+        <button type="submit" onClick={() => menuCtx.setMenuState("bookmarks")}>
+          <IconBookmark stroke={2} className={styles.iconColor} />
         </button>
       </div>
-      <button type="submit" className={styles.userBtn}>
-        <IconUserCircle stroke={2} />
+
+      <button
+        type="submit"
+        className={`${styles.userBtn} `}
+        onClick={() => menuCtx.setMenuState("auth-user")}
+      >
+        <IconUserCircle stroke={2} className={styles.iconColor} />
+      </button>
+      <button
+        type="submit"
+        className={`${styles.visibilityBtn} `}
+        onClick={() => hideSidebarHandler()}
+      >
+        {`${props.isSidebarMenuHidden ? ">" : "<"}`}
       </button>
     </div>
   );

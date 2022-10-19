@@ -3,6 +3,7 @@
 $marginTop: 5vh;
 $sidebarWidth: 70px;
 $sidebarHeight: 90vh;
+$sidebarMinHeight: 270px;
 $sidebarBgColor: rgb(22, 29, 47);
 $buttonColor: rgba(248, 253, 254, 0.5);
 $homeButtonColor: rgba(254, 69, 75, 0.75);
@@ -15,16 +16,33 @@ $homeButtonColor: rgba(254, 69, 75, 0.75);
   border-radius: 14px;
   width: $sidebarWidth;
   height: $sidebarHeight;
+  min-height: $sidebarMinHeight;
   background: $sidebarBgColor;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: ease-in-out;
+  transition-duration: 1s;
+  button {
+    transition: ease-in-out;
+    transition-duration: 0.35s;
+  }
+}
+
+.hidden {
+  margin-left: calc(12px - $sidebarWidth);
+}
+
+.homeBtn {
+  color: $homeButtonColor;
+  &:hover {
+    color: darken($color: $homeButtonColor, $amount: 20%);
+  }
 }
 
 .submenuContainer {
-  position: absolute;
-  top: 10%;
   @include absCenterHorizontally;
+  top: 10%;
   display: flex;
   flex-direction: column;
   button {
@@ -32,13 +50,32 @@ $homeButtonColor: rgba(254, 69, 75, 0.75);
     color: $buttonColor;
     margin: 10px 0;
   }
-}
-
-.homeBtn {
-  color: $homeButtonColor;
+  @media (max-height: 500px) {
+    top: 18%;
+  }
 }
 
 .userBtn {
   margin: 0 auto;
   color: $buttonColor;
+}
+
+.iconColor {
+  transition: ease-in-out;
+  transition-duration: 0.35s;
+  &:hover {
+    color: transparentize($color: white, $amount: 0.2);
+  }
+}
+
+.visibilityBtn {
+  @include absCenterVertically;
+  right: 0.1rem;
+  border-radius: 4px;
+  width: 10px;
+  height: 150px;
+  color: $buttonColor;
+  &:hover {
+    background-color: lighten($color: $sidebarBgColor, $amount: 10%);
+  }
 }

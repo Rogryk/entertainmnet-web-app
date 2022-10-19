@@ -1,44 +1,66 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IconBookmark, IconDeviceTvOld, IconMovie } from "@tabler/icons";
 import styles from "./Element.module.scss";
+import ElementContext from "../../store/element-context";
 
 interface IElement {
   image: string;
+  title: string;
+  year: number;
+  category: string;
+  rating: string;
   description?: string;
+  isBookmarked: boolean;
   theme?: "short" | "long";
 }
 
-const DUMMY_DATA = {
-  title: "Beyond Earth",
-
-  year: 2019,
-  category: "Movie",
-  rating: "PG",
-};
-
 const Element: React.FC<IElement> = (props) => {
+  const elementCtx = useContext(ElementContext);
   const theme = props.theme ? "theme_" + props.theme : "theme_short";
+
+  const bookmarkClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    elementCtx.setTitleToBookmark(props.title);
+  };
+
+  const thumbnailClickHanddler = (event: React.MouseEvent<HTMLDivElement>) => {
+    elementCtx.setTitleToOpen(props.title);
+  };
+
+  const icon = props.category === "movie" ? <IconMovie /> : <IconDeviceTvOld />;
   return (
     <>
-      <div className={`${styles.element} ${styles[theme]}`}>
+      <div
+        className={`${styles.element} ${styles[theme]}`}
+        onClick={(event) => thumbnailClickHanddler(event)}
+      >
         <img src={props.image} alt={`thumbnail of...`} />
-        <button className={styles.bookmark}>
-          <IconBookmark stroke={2} className={`${styles.bookmarkIcon} `} />
+        <button
+          className={`${styles.bookmark} `}
+          onClick={(event) => bookmarkClickHandler(event)}
+        >
+          <IconBookmark
+            stroke={2}
+            className={`${styles.bookmarkIcon} ${
+              props.isBookmarked && styles.bookmark_green
+            }`}
+          />
         </button>
         <div className={styles.description}>
           <ul className={styles.info}>
-            <li>{DUMMY_DATA.year}</li>
+            <li>{props.year}</li>
             <li>
               <span className={styles.info_category}>
-                <IconMovie />
-                {DUMMY_DATA.category}
+                {icon}
+                {props.category}
               </span>
             </li>
             <li>
-              <span>{DUMMY_DATA.rating}</span>
+              <span>{props.rating}</span>
             </li>
           </ul>
-          <h3>{DUMMY_DATA.title}</h3>
+          <h3>{props.title}</h3>
         </div>
       </div>
     </>

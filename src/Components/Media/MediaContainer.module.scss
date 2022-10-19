@@ -1,15 +1,21 @@
 $marginTop: 5vh;
-$mediaContainerWidth: calc(100vw - 150px);
+$mediaContainerWidthFull: calc(100vw - 150px);
+$mediaContainerWidthThin: calc(100vw - 40px);
 
 .mediaContainer {
   margin-top: $marginTop;
+  width: $mediaContainerWidthFull;
+
   float: right;
   justify-self: end;
   background: transparent;
   height: fit-content;
-  width: $mediaContainerWidth;
-  // border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: ease-in-out 1s;
+}
+
+.thin {
+  width: $mediaContainerWidthThin;
 }

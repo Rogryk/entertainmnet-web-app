@@ -14,3 +14,25 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin size-setup($width, $height) {
+  height: $height;
+  width: $width;
+  min-height: $height;
+  min-width: $width;
+}
+@mixin circle-setup($size) {
+  height: $size;
+  width: $size;
+  border-radius: 50%;
+  min-height: $size;
+  min-width: $size;
+}
+
+@mixin abs-position($top, $right, $bottom, $left) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
