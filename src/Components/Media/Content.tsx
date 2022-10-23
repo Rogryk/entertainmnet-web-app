@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Content.module.scss";
 import SubcontentContainer from "./SubcontentContainer";
+import ElementContext from "../../store/element-context";
 
 export interface IMediaContentElement {
   title: string;
-  theme: "short" | "long";
+  theme: "Short" | "Long";
   content: any[];
 }
 
-interface IContent {
+interface IContentProps {
   mediaContent: IMediaContentElement[];
 }
 
-const Content: React.FC<IContent> = (props) => {
+const Content: React.FC<IContentProps> = (props) => {
+  const elementCtx = useContext(ElementContext);
+
   return (
     <div className={styles.contentContainer}>
       {props.mediaContent.map((el: IMediaContentElement) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 interface IrequestConfig {
   url: string;
@@ -7,31 +7,39 @@ interface IrequestConfig {
   body?: any;
 }
 
-const useHttp = (requestConfig: IrequestConfig, applyData: any) => {
+const useHttp = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendRequest = async () => {
-    setIsLoading(true);
-    setError(null);
+  const sendRequest = useCallback(
+    async (requestConfig: IrequestConfig, applyData?: any) => {
+      // set isLoading only if there is any body content passed
+      !requestConfig.body && setIsLoading(true);
+      setError(null);
 
-    try {
-      const response = await fetch(requestConfig.url, {
-        method: requestConfig.method ? requestConfig.method : "GET",
-        headers: requestConfig.headers ? requestConfig.headers : {},
-        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
-      });
+      try {
+        const response = await fetch(requestConfig.url, {
+          method: requestConfig.method ? requestConfig.method : "GET",
+          headers: requestConfig.headers ? requestConfig.headers : {},
+          body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
+        });
 
-      if (!response.ok) {
-        throw new Error("Request failed");
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+        const data = await response.json();
+        applyData && applyData(data);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message || "Something went wrong.");
+        } else {
+          setError("Something went wrong.");
+        }
       }
-      const data = await response.json();
-      applyData(data);
-    } catch (err) {
-      setError("Something went wrong");
-    }
-    setIsLoading(false);
-  };
+      setIsLoading(false);
+    },
+    []
+  );
 
   return { isLoading, error, sendRequest };
 };

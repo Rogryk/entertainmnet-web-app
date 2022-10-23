@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import styles from "./ContentContainer.module.scss";
+import { useState, useEffect, useContext, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import useHttp from "../../hooks/useHttp";
+import Content, { IMediaContentElement } from "./Content";
 import shuffle from "../../utility/arrayShuffle";
 import MenuContext from "../../store/menu-context";
 import createBasicInfoArray from "../../utility/createBasicInfoArray";
-import Content from "./Content";
-import { IMediaContentElement } from "./Content";
 import SearchContext from "../../store/search-context";
-import useHttp from "../../hooks/useHttp";
 import ElementContext from "../../store/element-context";
+import { loadMedia, toggleBookmark } from "../../store/mediaSlice";
+import styles from "./ContentContainer.module.scss";
+import type { RootState, AppDispatch } from "../../store/store";
 
 export interface IMediaBasicInfo {
   title: string;
@@ -16,6 +18,13 @@ export interface IMediaBasicInfo {
   category: string;
   isBookmarked: boolean;
   smallThumbnail: string;
+}
+
+export interface IMediaElement extends IMediaBasicInfo {
+  category: string;
+  isBookmarked: boolean;
+  isTrending: boolean;
+  thumbnail: IMediaElementThumbnail;
 }
 
 interface IMediaElementThumbnailContent {
@@ -28,15 +37,11 @@ interface IMediaElementThumbnail {
   trending?: IMediaElementThumbnailContent;
 }
 
-interface IMediaElement extends IMediaBasicInfo {
-  category: string;
-  isBookmarked: boolean;
-  isTrending: boolean;
-  thumbnail: IMediaElementThumbnail;
-}
+const FIREBASE_URL =
+  "https://web-entertainment-app-default-rtdb.firebaseio.com/public/media.json";
+let isInitial = true;
 
 const ContentContainer = () => {
-  const [media, setMedia] = useState<IMediaElement[]>([]);
   const [contentToDisplay, setContentToDisplay] = useState<
     IMediaContentElement[] | null
   >(null);
@@ -45,67 +50,70 @@ const ContentContainer = () => {
 
   const menuCtx = useContext(MenuContext);
   const searchCtx = useContext(SearchContext);
+  const dispatch = useDispatch<AppDispatch>();
+  const media = useSelector((state: RootState) => state.media.media);
 
-  const setMediaHandler = (fetchedData: any) => {
-    const temp = fetchedData.map((el: any) => {
-      el.thumbnail.regular.large = el.thumbnail.regular.large.replace(
-        "./assets/",
-        ""
-      );
-      el.thumbnail.regular.medium = el.thumbnail.regular.medium.replace(
-        "./assets/",
-        ""
-      );
-      el.thumbnail.regular.small = el.thumbnail.regular.small.replace(
-        "./assets/",
-        ""
-      );
-      if (el.thumbnail.trending) {
-        el.thumbnail.trending.small = el.thumbnail.trending.small.replace(
+  const setMediaHandler = useCallback(
+    (fetchedData: IMediaElement[]) => {
+      const temp = fetchedData.map((el: IMediaElement) => {
+        el.thumbnail.regular.large = el.thumbnail.regular.large.replace(
           "./assets/",
           ""
         );
-        el.thumbnail.trending.large = el.thumbnail.trending.large.replace(
+        el.thumbnail.regular.medium = el.thumbnail.regular.medium?.replace(
           "./assets/",
           ""
         );
-      }
-      return el;
-    });
-    setMedia(temp);
-  };
-
-  const {
-    isLoading,
-    error,
-    sendRequest: fetchMedia,
-  } = useHttp(
-    {
-      url: "https://web-entertainment-app-default-rtdb.firebaseio.com/public/media.json",
+        el.thumbnail.regular.small = el.thumbnail.regular.small.replace(
+          "./assets/",
+          ""
+        );
+        if (el.thumbnail.trending) {
+          el.thumbnail.trending.small = el.thumbnail.trending.small.replace(
+            "./assets/",
+            ""
+          );
+          el.thumbnail.trending.large = el.thumbnail.trending.large.replace(
+            "./assets/",
+            ""
+          );
+        }
+        return el;
+      });
+      dispatch(loadMedia(fetchedData));
     },
-    setMediaHandler
+    [dispatch]
   );
 
-  const displayInLog = (data: any) => {
-    // console.log(data);
-  };
+  const { isLoading, error, sendRequest } = useHttp();
 
-  const { sendRequest: updateMedia } = useHttp(
-    {
-      url: "https://web-entertainment-app-default-rtdb.firebaseio.com/public.json",
-      method: "PATCH",
-      body: { media: media },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-    null
-  );
-
-  // initial fetch
+  // Fetch media from server
   useEffect(() => {
-    fetchMedia();
-  }, []);
+    sendRequest(
+      {
+        url: FIREBASE_URL,
+      },
+      setMediaHandler
+    );
+  }, [sendRequest, setMediaHandler]);
+
+  // Push updated media to server
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (media.length > 1) {
+      sendRequest({
+        url: FIREBASE_URL,
+        method: "PUT",
+        body: { ...media },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+  }, [media, sendRequest]);
 
   useEffect(() => {
     if (media) {
@@ -118,7 +126,7 @@ const ContentContainer = () => {
         setContentToDisplay([
           {
             title: "Found",
-            theme: "short",
+            theme: "Short",
             content: tempSearchedBasicInfo,
           },
         ]);
@@ -136,15 +144,15 @@ const ContentContainer = () => {
           const notTrendingBasicInfo = createBasicInfoArray(tempNotTrending);
 
           setContentToDisplay([
-            { title: "Trending", theme: "long", content: trendingBasicInfo },
+            { title: "Trending", theme: "Long", content: trendingBasicInfo },
             {
               title: "Recommended for you",
-              theme: "short",
+              theme: "Short",
               content: notTrendingBasicInfo?.slice(0, 12),
             },
             {
               title: "Random",
-              theme: "short",
+              theme: "Short",
               content: shuffle([...notTrendingBasicInfo])?.slice(0, 6),
             },
           ]);
@@ -158,7 +166,7 @@ const ContentContainer = () => {
           );
           const tvSeriesBasicInfo = createBasicInfoArray(tempTvSeries);
           setContentToDisplay([
-            { title: "TV Series", theme: "short", content: tvSeriesBasicInfo },
+            { title: "TV Series", theme: "Short", content: tvSeriesBasicInfo },
           ]);
         }
 
@@ -167,7 +175,7 @@ const ContentContainer = () => {
           const tempMovie = media.filter((el) => el.category === "Movie");
           const movieBasicInfo = createBasicInfoArray(tempMovie);
           setContentToDisplay([
-            { title: "Movies", theme: "short", content: movieBasicInfo },
+            { title: "Movies", theme: "Short", content: movieBasicInfo },
           ]);
         }
 
@@ -178,7 +186,7 @@ const ContentContainer = () => {
           setContentToDisplay([
             {
               title: "Bookmarks",
-              theme: "short",
+              theme: "Short",
               content: bookmarkedBasicInfo,
             },
           ]);
@@ -188,23 +196,7 @@ const ContentContainer = () => {
   }, [media, menuCtx.menuState, searchCtx.searchText]);
 
   useEffect(() => {
-    if (titleToBookmark.length > 1 && media) {
-      setMedia((prevMedia) => {
-        return prevMedia.map((el) => {
-          if (el.title.includes(titleToBookmark)) {
-            el.isBookmarked = !el.isBookmarked;
-          }
-          return el;
-        });
-      });
-
-      // send updated data to server
-      updateMedia();
-    }
-
-    return () => {
-      setTitleToBookmark("");
-    };
+    titleToBookmark && dispatch(toggleBookmark(titleToBookmark));
   }, [titleToBookmark]);
 
   return (
@@ -212,10 +204,10 @@ const ContentContainer = () => {
       {!isLoading && !error && (
         <ElementContext.Provider
           value={{
-            titleToBookmark: titleToBookmark,
-            setTitleToBookmark: setTitleToBookmark,
-            titleToOpen: titleToOpen,
-            setTitleToOpen: setTitleToOpen,
+            titleToBookmark,
+            setTitleToBookmark,
+            titleToOpen,
+            setTitleToOpen,
           }}
         >
           {contentToDisplay && <Content mediaContent={contentToDisplay} />}
@@ -223,7 +215,7 @@ const ContentContainer = () => {
       )}
       <div className={styles.stateDisplay}>
         {isLoading && "Loading data..."}
-        {error && "Loading error. Try refresh."}
+        {error && `Loading error. Try refresh. ${error}`}
       </div>
     </>
   );

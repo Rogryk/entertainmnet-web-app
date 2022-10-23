@@ -1,16 +1,16 @@
 import React from "react";
-import Element from "./Element";
+import Element from "./ThumbnailElement";
 import styles from "./SubcontentContainer.module.scss";
 import { IMediaBasicInfo } from "./ContentContainer";
 
 interface ISubcontentContainer {
   content: IMediaBasicInfo[];
   title: string;
-  theme?: "short" | "long";
+  theme?: "Short" | "Long";
 }
 
 const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
-  const theme = props.theme ? "theme_" + props.theme : "theme_short";
+  const theme = props.theme ? "theme" + props.theme : "themeShort";
 
   return (
     <div className={styles.wrapper}>

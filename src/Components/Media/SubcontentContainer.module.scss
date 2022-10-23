@@ -10,7 +10,7 @@
   min-height: $height;
 }
 //Long (trending) display
-.theme_long {
+.themeLong {
   @include size-setup(100%, fit-content);
   @include overflow-setup(scroll, hidden);
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 //Short (normal) display
-.theme_short {
+.themeShort {
   @include size-setup(100%, fit-content);
   @include overflow-setup(hidden, hidden);
   display: grid; /* 1 */

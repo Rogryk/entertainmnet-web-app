@@ -20,6 +20,8 @@
   width: $width;
   min-height: $height;
   min-width: $width;
+  max-height: $height;
+  max-width: $width;
 }
 @mixin circle-setup($size) {
   height: $size;
