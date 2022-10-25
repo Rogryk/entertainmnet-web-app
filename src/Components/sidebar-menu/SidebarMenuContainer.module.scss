@@ -1,12 +1,12 @@
 @import "../../layout/mixins";
 
-$marginTop: 5vh;
-$sidebarWidth: 70px;
-$sidebarHeight: 90vh;
-$sidebarMinHeight: 270px;
-$sidebarBgColor: rgb(22, 29, 47);
-$buttonColor: rgba(248, 253, 254, 0.5);
-$homeButtonColor: rgba(254, 69, 75, 0.75);
+// $marginTop: 5vh;
+// $sidebarWidth: 70px;
+// $sidebarHeight: 90vh;
+// $sidebarMinHeight: 270px;
+// $sidebarBgColor: rgb(22, 29, 47);
+// $buttonColor: rgba(248, 253, 254, 0.5);
+// $homeButtonColor: rgba(254, 69, 75, 0.75);
 
 .sidebarMenuContainer {
   position: fixed;
@@ -34,9 +34,9 @@ $homeButtonColor: rgba(254, 69, 75, 0.75);
 }
 
 .homeBtn {
-  color: $homeButtonColor;
+  color: $uiRed;
   &:hover {
-    color: darken($color: $homeButtonColor, $amount: 20%);
+    color: darken($color: $uiRed, $amount: 20%);
   }
 }
 
@@ -78,4 +78,29 @@ $homeButtonColor: rgba(254, 69, 75, 0.75);
   &:hover {
     background-color: lighten($color: $sidebarBgColor, $amount: 10%);
   }
+}
+
+.userAction {
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  background: $sidebarBgColor;
+  color: white;
+  button {
+    &:hover {
+      background: lighten($color: $sidebarBgColor, $amount: 10%);
+    }
+  }
+}
+
+.validateFormWrapper {
+  @include absCenterXY();
+  width: 500px;
+  height: 500px;
+  background: $sidebarBgColor;
+  color: white;
 }

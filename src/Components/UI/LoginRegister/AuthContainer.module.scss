@@ -1,0 +1,33 @@
+@import "../../../layout/_mixins";
+
+.authContainer {
+  @include absCenterXY();
+  width: 400px;
+  height: 25rem;
+  background: $sidebarBgColor;
+  color: white;
+  justify-content: center;
+  margin: auto;
+  border-radius: 0.5rem;
+}
+
+.tab {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 2rem;
+  width: 50%;
+  &:hover {
+    background: lighten($color: $sidebarBgColor, $amount: 10%);
+  }
+  &:focus {
+    background: lighten($color: $sidebarBgColor, $amount: 10%);
+    color: rgba(255, 255, 255, 0.8);
+  }
+  &:checked {
+    background: lighten($color: $sidebarBgColor, $amount: 10%);
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.tabLabel {
+  color: rgba(255, 255, 255, 0.8);
+}

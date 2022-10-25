@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authSlice from "./authSlice";
 import mediaReducer from "./mediaSlice";
 
 export const store = configureStore({
   reducer: {
     media: mediaReducer,
+    auth: authSlice,
   },
 });
 

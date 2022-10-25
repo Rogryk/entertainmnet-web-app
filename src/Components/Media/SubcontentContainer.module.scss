@@ -19,13 +19,22 @@
 }
 
 //Short (normal) display
+// .themeShort {
+//   @include size-setup(100%, min-content);
+//   @include overflow-setup(hidden, hidden);
+//   display: grid; /* 1 */
+//   grid-template-columns: repeat(auto-fill, 170px); /* 2 */
+//   grid-gap: 0.7rem; /* 3 */
+//   justify-content: space-between; /* 4 */
+// }
 .themeShort {
-  @include size-setup(100%, fit-content);
+  @include size-setup(100%, min-content);
   @include overflow-setup(hidden, hidden);
-  display: grid; /* 1 */
-  grid-template-columns: repeat(auto-fill, 170px); /* 2 */
-  grid-gap: 0.7rem; /* 3 */
-  justify-content: space-between; /* 4 */
+  display: flex;
+  column-gap: 0.7rem;
+  row-gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .wrapper {

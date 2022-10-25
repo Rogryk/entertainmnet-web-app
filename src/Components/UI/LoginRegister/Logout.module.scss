@@ -1,0 +1,25 @@
+@import "../../../layout/_mixins";
+@import "../../../layout/layout";
+
+.logoutContainer {
+  @include absCenterXY();
+  width: 15rem;
+  height: 10rem;
+  background: $sidebarBgColor;
+  color: white;
+  justify-content: center;
+  margin: auto;
+  border-radius: 0.5rem;
+  button {
+    @include absCenterXY();
+    width: 8.5rem;
+    height: 4.5rem;
+    font-size: 2rem;
+    background: $uiRed;
+    color: $uiWhite;
+    border-radius: 0.5rem;
+    &:hover {
+      background-color: darken($color: $uiRed, $amount: 10%) !important;
+    }
+  }
+}

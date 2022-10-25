@@ -1,5 +1,6 @@
 $height: calc(100% - 40px - 20px);
-$width: 1120px;
+// $width: 1120px;
+$width: 98%;
 
 .contentContainer {
   height: $height;
@@ -9,4 +10,5 @@ $width: 1120px;
   display: flex;
   flex-direction: column;
   color: white;
+  margin: auto;
 }

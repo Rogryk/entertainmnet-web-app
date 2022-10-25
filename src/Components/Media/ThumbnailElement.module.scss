@@ -17,9 +17,14 @@ $picHeightShort: calc($elementHeightShort - $descHeight);
 $picWidthShort: 170px;
 
 .themeShort {
-  @include size-setup($picWidthShort, $elementHeightShort);
+  // @include size-setup($picWidthShort, $elementHeightShort);
+  // @include size-setup(250px, 150px);
+  max-width: 220px;
+  min-width: 140px;
+  flex: 1;
   img {
-    @include size-setup(100%, calc(100% - $descHeight));
+    // @include size-setup(100%, calc(100% - $descHeight));
+    // @include size-setup(100%, calc(150px - $descHeight));
   }
   .description {
     padding-top: 0.3rem;
