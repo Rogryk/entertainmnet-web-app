@@ -1,3 +1,5 @@
+@import "../../layout/layout";
+
 @mixin overflow-setup($x, $y) {
   overflow-x: $x;
   overflow-y: $y;
@@ -9,6 +11,10 @@
   height: $height;
   min-height: $height;
 }
+
+//Breakpoints
+$breakpoint1: 768px;
+
 //Long (trending) display
 .themeLong {
   @include size-setup(100%, fit-content);
@@ -18,23 +24,19 @@
   gap: 20px;
 }
 
-//Short (normal) display
-// .themeShort {
-//   @include size-setup(100%, min-content);
-//   @include overflow-setup(hidden, hidden);
-//   display: grid; /* 1 */
-//   grid-template-columns: repeat(auto-fill, 170px); /* 2 */
-//   grid-gap: 0.7rem; /* 3 */
-//   justify-content: space-between; /* 4 */
-// }
+// Short (normal) display
 .themeShort {
   @include size-setup(100%, min-content);
   @include overflow-setup(hidden, hidden);
-  display: flex;
-  column-gap: 0.7rem;
-  row-gap: 1rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-gap: 0.7rem;
   justify-content: space-between;
+  @media screen and (max-width: $breakpointPhone) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .wrapper {
@@ -45,6 +47,9 @@
   h2 {
     width: 100%;
     font-size: 1.5rem;
+    @media screen and (max-width: $breakpointPhone) {
+      text-align: center;
+    }
   }
 }
 

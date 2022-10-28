@@ -1,13 +1,5 @@
 @import "../../layout/mixins";
-
-// $marginTop: 5vh;
-// $sidebarWidth: 70px;
-// $sidebarHeight: 90vh;
-// $sidebarMinHeight: 270px;
-// $sidebarBgColor: rgb(22, 29, 47);
-// $buttonColor: rgba(248, 253, 254, 0.5);
-// $homeButtonColor: rgba(254, 69, 75, 0.75);
-
+@import "../../layout/layout";
 .sidebarMenuContainer {
   position: fixed;
   top: $marginTop;
@@ -23,9 +15,13 @@
   justify-content: space-between;
   transition: ease-in-out;
   transition-duration: 1s;
+  z-index: 99;
   button {
     transition: ease-in-out;
     transition-duration: 0.35s;
+  }
+  @media screen and (max-width: $breakpointPhone) {
+    visibility: hidden;
   }
 }
 
@@ -65,6 +61,22 @@
   transition-duration: 0.35s;
   &:hover {
     color: transparentize($color: white, $amount: 0.2);
+  }
+}
+
+.menuItem {
+  padding: 0.55rem 5%;
+
+  svg {
+    display: inline;
+  }
+  &:last-child {
+    width: 90%;
+    position: absolute;
+    bottom: 5%;
+  }
+  &:hover {
+    background: lighten($color: $sidebarBgColor, $amount: 20%);
   }
 }
 

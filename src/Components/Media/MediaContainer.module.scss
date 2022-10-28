@@ -1,6 +1,10 @@
+@import "../../layout/layout";
+
 $marginTop: 5vh;
 $mediaContainerWidthFull: calc(100vw - 150px);
+$mediaContainerWidthPhone: 99%;
 $mediaContainerWidthThin: 99%;
+$mediaContainerWidthThinBreakpoint1: 97%;
 
 .mediaContainer {
   margin-top: $marginTop;
@@ -12,8 +16,14 @@ $mediaContainerWidthThin: 99%;
   flex-direction: column;
   justify-content: space-between;
   transition: ease-in-out 1s;
+  @media screen and (max-width: $breakpointPhone) {
+    width: $mediaContainerWidthPhone;
+  }
 }
 
 .thin {
   width: $mediaContainerWidthThin;
+  @media (max-width: $breakpointThin1) {
+    width: $mediaContainerWidthThinBreakpoint1;
+  }
 }

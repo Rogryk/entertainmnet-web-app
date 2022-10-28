@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./RegisterForm.module.scss";
-import { initializeApp } from "firebase/app";
-import FIREBASE_CONFIG from "../../../utility/FIREBASE_CONFIG";
-import firebaseApp from "../../../utility/initFirebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import type { UserCredentialsProps } from "../../../store/authSlice";
 
 interface IFormInput {
   email: string;
@@ -13,7 +10,7 @@ interface IFormInput {
 }
 
 interface RegisterFormProps {
-  onRegister: () => void;
+  onRegister: (userCredentials: UserCredentialsProps) => void;
 }
 
 const RegisterForm = ({ onRegister }: RegisterFormProps) => {
@@ -29,19 +26,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log(data);
-
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log("account created");
-        onRegister();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("Error: account NOT created");
-      });
+    onRegister({ email: data.email, password: data.password });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -8,63 +8,28 @@ import {
   IconUserCircle,
   IconLayoutGrid,
 } from "@tabler/icons";
-import MenuContext from "../../store/menu-context";
 import styles from "./SidebarMenuContainer.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import FIREBASE_CONFIG from "../../utility/FIREBASE_CONFIG";
-import AuthContainer from "../UI/LoginRegister/AuthContainer";
-import Logout from "../UI/LoginRegister/Logout";
+import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
+import { toggleAuthWindow } from "../../store/authSlice";
+import { setCategory } from "../../store/navigationSlice";
+import type { RootState } from "../../store/store";
 
 interface ISidebarMenuContainer {
   isSidebarMenuHidden: boolean;
   setIsSidebarMenuHidden: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const firebaseApp = initializeApp(FIREBASE_CONFIG);
-
 const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const menuCtx = useContext(MenuContext);
-  const dispatch = useDispatch();
-
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // https://firebase.google.com/docs/reference/js/firebase.User
-    } else {
-      console.log("user signed out");
-    }
-  });
+  const dispatch = useAppDispatch();
+  const authSel = useAppSelector((state) => state.auth);
 
   const hideSidebarHandler = () => {
     props.setIsSidebarMenuHidden((prev) => !prev);
   };
 
   const avatarClickHandler = () => {
-    console.log(auth.currentUser?.email);
-    setIsAuthOpen(false);
-
-    setIsAuthOpen((prev) => !prev);
-  };
-
-  const loginHandler = async () => {
-    setIsAuthOpen(false);
-  };
-  const registerHandler = async () => {
-    setIsAuthOpen(false);
-  };
-  const onBlurClickHandler = () => {
-    setIsAuthOpen(false);
-  };
-
-  const logoutHandler = async () => {
-    await auth.signOut();
-    setIsAuthOpen(false);
-    menuCtx.menuState === "bookmarks" && menuCtx.setMenuState("home");
-    return;
+    !authSel.isAuthWindowOpen && dispatch(toggleAuthWindow());
   };
 
   return (
@@ -77,31 +42,31 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
         <button
           type="submit"
           className={styles.homeBtn}
-          onClick={() => menuCtx.setMenuState("home")}
+          onClick={() => dispatch(setCategory("home"))}
         >
           <FontAwesomeIcon icon={faHouse} size="lg" />
         </button>
         <div className={styles.submenuContainer}>
           <button
             type="submit"
-            onClick={() => menuCtx.setMenuState("categories")}
+            onClick={() => dispatch(setCategory("categories"))}
           >
             <IconLayoutGrid stroke={2} className={styles.iconColor} />
           </button>
           <button
             type="submit"
-            onClick={() => menuCtx.setMenuState("tvseries")}
+            onClick={() => dispatch(setCategory("tvseries"))}
           >
             <IconDeviceTvOld stroke={2} className={styles.iconColor} />
           </button>
-          <button type="submit" onClick={() => menuCtx.setMenuState("movies")}>
+          <button type="submit" onClick={() => dispatch(setCategory("movies"))}>
             <IconMovie stroke={2} className={styles.iconColor} />
           </button>
 
-          {auth.currentUser?.uid && (
+          {authSel.isAuthorized && (
             <button
               type="submit"
-              onClick={() => menuCtx.setMenuState("bookmarks")}
+              onClick={() => dispatch(setCategory("bookmarks"))}
             >
               <IconBookmark stroke={2} className={styles.iconColor} />
             </button>
@@ -123,16 +88,6 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
           {`${props.isSidebarMenuHidden ? ">" : "<"}`}
         </button>
       </div>
-      {isAuthOpen &&
-        (auth.currentUser?.uid ? (
-          <Logout logoutHandler={logoutHandler} onBlur={onBlurClickHandler} />
-        ) : (
-          <AuthContainer
-            onLogin={loginHandler}
-            onRegister={registerHandler}
-            onBlur={onBlurClickHandler}
-          />
-        ))}
     </>
   );
 };

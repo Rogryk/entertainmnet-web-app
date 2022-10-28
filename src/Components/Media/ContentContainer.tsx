@@ -1,5 +1,8 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+
+import NavigationSlice, { setCategory } from "../../store/navigationSlice";
 import useHttp from "../../hooks/useHttp";
 import Content, { IMediaContentElement } from "./Content";
 import shuffle from "../../utility/arrayShuffle";
@@ -51,7 +54,8 @@ const ContentContainer = () => {
   const menuCtx = useContext(MenuContext);
   const searchCtx = useContext(SearchContext);
   const dispatch = useDispatch<AppDispatch>();
-  const media = useSelector((state: RootState) => state.media.media);
+  const mediaSel = useAppSelector((state) => state.media.media);
+  const navSel = useAppSelector((state) => state.nav);
 
   const setMediaHandler = useCallback(
     (fetchedData: IMediaElement[]) => {
@@ -103,24 +107,27 @@ const ContentContainer = () => {
       isInitial = false;
       return;
     }
-    if (media.length > 1) {
+    if (mediaSel.length > 1) {
       sendRequest({
         url: FIREBASE_URL,
         method: "PUT",
-        body: { ...media },
+        body: { ...mediaSel },
         headers: {
           "Content-Type": "application/json",
         },
       });
     }
-  }, [media, sendRequest]);
+  }, [mediaSel, sendRequest]);
 
   useEffect(() => {
-    if (media) {
+    if (mediaSel) {
       // ### SEARCH ###
-      if (searchCtx.searchText) {
-        const tempSearched = media.filter((el) =>
-          el.title.toLowerCase().includes(searchCtx.searchText.toLowerCase())
+
+      console.log("mediaSel");
+      if (navSel.searchValue) {
+        console.log("search");
+        const tempSearched = mediaSel.filter((el) =>
+          el.title.toLowerCase().includes(navSel.searchValue.toLowerCase())
         );
         const tempSearchedBasicInfo = createBasicInfoArray(tempSearched);
         setContentToDisplay([
@@ -131,16 +138,18 @@ const ContentContainer = () => {
           },
         ]);
       }
-      if (!searchCtx.searchText) {
+      if (!navSel.searchValue) {
         // ### HOME ###
-        if (menuCtx.menuState === "home") {
-          const tempTrending = media.filter((el) => el.isTrending === true);
+        if (navSel.currentCategory === "home") {
+          const tempTrending = mediaSel.filter((el) => el.isTrending === true);
           const trendingBasicInfo = createBasicInfoArray(
             tempTrending,
             "trending"
           );
 
-          const tempNotTrending = media.filter((el) => el.isTrending !== true);
+          const tempNotTrending = mediaSel.filter(
+            (el) => el.isTrending !== true
+          );
           const notTrendingBasicInfo = createBasicInfoArray(tempNotTrending);
 
           setContentToDisplay([
@@ -160,8 +169,8 @@ const ContentContainer = () => {
 
         // ### TV SERIES ###
         //TODO: rewrite to switch
-        if (menuCtx.menuState === "tvseries") {
-          const tempTvSeries = media.filter(
+        if (navSel.currentCategory === "tvseries") {
+          const tempTvSeries = mediaSel.filter(
             (el) => el.category === "TV Series"
           );
           const tvSeriesBasicInfo = createBasicInfoArray(tempTvSeries);
@@ -171,8 +180,8 @@ const ContentContainer = () => {
         }
 
         // ### MOVIES ###
-        if (menuCtx.menuState === "movies") {
-          const tempMovie = media.filter((el) => el.category === "Movie");
+        if (navSel.currentCategory === "movies") {
+          const tempMovie = mediaSel.filter((el) => el.category === "Movie");
           const movieBasicInfo = createBasicInfoArray(tempMovie);
           setContentToDisplay([
             { title: "Movies", theme: "Short", content: movieBasicInfo },
@@ -180,8 +189,10 @@ const ContentContainer = () => {
         }
 
         // ### BOOKMARKS ###
-        if (menuCtx.menuState === "bookmarks") {
-          const tempBookmarked = media.filter((el) => el.isBookmarked === true);
+        if (navSel.currentCategory === "bookmarks") {
+          const tempBookmarked = mediaSel.filter(
+            (el) => el.isBookmarked === true
+          );
           const bookmarkedBasicInfo = createBasicInfoArray(tempBookmarked);
           setContentToDisplay([
             {
@@ -193,7 +204,7 @@ const ContentContainer = () => {
         }
       }
     }
-  }, [media, menuCtx.menuState, searchCtx.searchText]);
+  }, [mediaSel, navSel.currentCategory, navSel.searchValue]);
 
   useEffect(() => {
     titleToBookmark && dispatch(toggleBookmark(titleToBookmark));

@@ -1,14 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./LoginForm.module.scss";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-interface IFormInput {
-  email: string;
-  password: string;
-}
+import { UserCredentialsProps } from "../../../store/authSlice";
 
 interface LoginFormProps {
-  onLogin: () => void;
+  onLogin: (userCredentials: UserCredentialsProps) => void;
 }
 
 const LoginForm = ({ onLogin }: LoginFormProps) => {
@@ -16,23 +12,11 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
     handleSubmit,
     register,
     formState: { isSubmitted, errors },
-  } = useForm<IFormInput>({ reValidateMode: "onSubmit" });
+  } = useForm<UserCredentialsProps>({ reValidateMode: "onSubmit" });
   const auth = getAuth();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log("Logged in as: ", user.email);
-        onLogin();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("Error: Login failed");
-      });
+  const onSubmit: SubmitHandler<UserCredentialsProps> = (UserCredentials) => {
+    onLogin(UserCredentials);
   };
 
   return (

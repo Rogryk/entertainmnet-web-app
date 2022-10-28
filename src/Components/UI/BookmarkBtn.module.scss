@@ -9,6 +9,7 @@ $isBookmarkedColor: rgba(2, 255, 36, 0.8);
   @include circle-setup($btnSize);
   background: $bgColor;
   transition: ease-in-out, 0.35s;
+  z-index: 19;
   &:hover {
     $posTranslate: ($btnSize + $enlargeOnHover - $btnSize) / 2;
     transform: translate($posTranslate, -$posTranslate);

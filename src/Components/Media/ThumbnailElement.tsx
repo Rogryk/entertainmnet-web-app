@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector } from "../../hooks/reduxHooks";
 import ElementContext from "../../store/element-context";
 import { toggleBookmark } from "../../store/mediaSlice";
 import { IconDeviceTvOld, IconMovie } from "@tabler/icons";
@@ -26,6 +27,7 @@ const Element: React.FC<IElement> = (props) => {
   const theme = props.theme ? "theme" + props.theme : "themeShort";
 
   const dispatch = useDispatch();
+  const authSel = useAppSelector((state) => state.auth);
 
   const bookmarkClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(toggleBookmark(props.title));
@@ -50,21 +52,22 @@ const Element: React.FC<IElement> = (props) => {
       onClick={(event) => thumbnailClickHanddler(event)}
     >
       <div className={styles.imgWrapper}>
-        {isHovered && (
-          <div className={styles.hoverLayer}>
-            <PlayBtn classNames={styles.playBtnPos} />
-          </div>
-        )}
+        <div className={`${styles.hoverLayer}  ${isHovered && styles.show}`}>
+          <PlayBtn classNames={styles.playBtnPos} />
+        </div>
+
         <img
           src={props.image}
           alt={`thumbnail of...`}
-          className={`${isHovered ? styles["imgHoverEffect"] : ""}`}
+          className={`${isHovered && styles.imgHoverEffect}`}
         />
-        <BookmarkBtn
-          isBookmarked={props.isBookmarked}
-          bookmarkHandler={bookmarkClickHandler}
-          classNames={styles.bookmarkPos}
-        />
+        {authSel.isAuthorized && (
+          <BookmarkBtn
+            isBookmarked={props.isBookmarked}
+            bookmarkHandler={bookmarkClickHandler}
+            classNames={styles.bookmarkPos}
+          />
+        )}
       </div>
 
       <div

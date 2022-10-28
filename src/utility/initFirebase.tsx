@@ -3,9 +3,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 // Initialize Firebase
-const init = () => {
-  const firebaseApp = initializeApp(FIREBASE_CONFIG);
-};
 
-export default init;
-export const auth = getAuth();
+const app = initializeApp(FIREBASE_CONFIG);
+export const auth = getAuth(app);

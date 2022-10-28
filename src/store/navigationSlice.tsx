@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface stateProps {
+  searchValue: string;
+  currentCategory: "home" | "bookmarks" | "movies" | "tvseries";
+  contentToOpen: string;
+}
+
+const initialState: stateProps = {
   searchValue: "",
-  menuDisplay: "home",
+  currentCategory: "home",
   contentToOpen: "",
 };
 
@@ -10,6 +16,12 @@ const navigationSlice = createSlice({
   name: "navigation",
   initialState,
   reducers: {
+    setCategory(state, action) {
+      state.currentCategory = action.payload;
+    },
+    setSearchValue(state, action) {
+      state.searchValue = action.payload;
+    },
     openContent(state, action) {
       state.contentToOpen = action.payload;
     },
@@ -17,4 +29,5 @@ const navigationSlice = createSlice({
 });
 
 export default navigationSlice.reducer;
-export const { openContent } = navigationSlice.actions;
+export const { setCategory, setSearchValue, openContent } =
+  navigationSlice.actions;

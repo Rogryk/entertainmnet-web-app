@@ -1,5 +1,7 @@
+@import "../../layout/layout";
 $height: 40px;
 $width: 400px;
+$widthPhone: 60%;
 $fontSize: 1.35rem;
 
 .searchbar {
@@ -11,6 +13,9 @@ $fontSize: 1.35rem;
   color: whitesmoke;
   font-size: $fontSize;
   align-items: center;
+  @media screen and (max-width: $breakpointPhone) {
+    width: $widthPhone;
+  }
 }
 
 .input {

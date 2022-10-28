@@ -3,10 +3,11 @@ import styles from "./AuthContainer.module.scss";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { Tabs } from "@mantine/core";
+import type { UserCredentialsProps } from "../../../store/authSlice";
 
 interface AuthContainerProps {
-  onLogin: () => void;
-  onRegister: () => void;
+  onLogin: (userCredentials: UserCredentialsProps) => void;
+  onRegister: (userCredentials: UserCredentialsProps) => void;
   onBlur: () => void;
 }
 

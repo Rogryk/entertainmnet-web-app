@@ -10,6 +10,14 @@ $buttonColor: rgba(248, 253, 254, 0.5);
 $uiRed: rgba(254, 69, 75, 0.75);
 $uiWhite: rgba(255, 255, 255, 1);
 
+@mixin abs-position($top, $right, $bottom, $left) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
 @mixin absCenterVertically {
   position: absolute;
   top: 50%;
@@ -48,12 +56,4 @@ $uiWhite: rgba(255, 255, 255, 1);
   border-radius: 50%;
   min-height: $size;
   min-width: $size;
-}
-
-@mixin abs-position($top, $right, $bottom, $left) {
-  position: absolute;
-  top: $top;
-  right: $right;
-  bottom: $bottom;
-  left: $left;
 }

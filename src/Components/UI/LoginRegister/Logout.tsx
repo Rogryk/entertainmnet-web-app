@@ -3,14 +3,12 @@ import styles from "./Logout.module.scss";
 import Button from "../Button";
 
 interface LogoutProps {
-  logoutHandler: () => void;
+  logoutHandler: any;
   onBlur: () => void;
 }
 
 const Logout = ({ logoutHandler, onBlur }: LogoutProps) => {
   const blurHandler = (e: React.FocusEvent<HTMLDivElement, Element>) => {
-    console.log(e.currentTarget);
-
     if (e.currentTarget.contains(e.relatedTarget)) return;
     onBlur();
   };

@@ -1,0 +1,27 @@
+@import "../../../layout/layout";
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+.auth {
+  position: fixed;
+  top: 10%;
+  left: 15%;
+  min-width: 80vw;
+  min-height: 80vh;
+  z-index: 100;
+
+  @media screen and (max-width: $breakpointPhone) {
+    padding-top: 15vh;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+}
