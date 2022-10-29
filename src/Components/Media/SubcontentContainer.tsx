@@ -2,6 +2,7 @@ import React from "react";
 import Element from "./ThumbnailElement";
 import styles from "./SubcontentContainer.module.scss";
 import { IMediaBasicInfo } from "./ContentContainer";
+import { Route } from "react-router-dom";
 
 interface ISubcontentContainer {
   content: IMediaBasicInfo[];
@@ -13,6 +14,7 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
   const theme = props.theme ? "theme" + props.theme : "themeShort";
 
   return (
+    // <Route path={`/${props.title.replace(/\s/g, "")}`}>
     <div className={styles.wrapper}>
       <h2>{props.title}</h2>
       <div className={`${styles.subcontentContainer} ${styles[theme]}`}>
@@ -33,6 +35,7 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
           })}
       </div>
     </div>
+    // </Route>
   );
 };
 

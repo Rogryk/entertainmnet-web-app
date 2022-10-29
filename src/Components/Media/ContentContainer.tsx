@@ -122,8 +122,6 @@ const ContentContainer = () => {
   useEffect(() => {
     if (mediaSel) {
       // ### SEARCH ###
-
-      console.log("mediaSel");
       if (navSel.searchValue) {
         console.log("search");
         const tempSearched = mediaSel.filter((el) =>

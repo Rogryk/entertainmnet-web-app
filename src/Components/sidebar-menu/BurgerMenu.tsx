@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import MenuContext from "../../store/menu-context";
+import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { toggleAuthWindow } from "../../store/authSlice";
@@ -77,20 +78,30 @@ const BurgerButton = (props: BurgerButtonProps) => {
         href="/"
         onClick={menuHandler}
       >
-        <FontAwesomeIcon icon={faHouse} size="lg" /> Home
+        <Link to="/home">
+          <FontAwesomeIcon icon={faHouse} size="lg" /> Home
+        </Link>
       </a>
       <a className={styles.menuItem} href="/categories" onClick={menuHandler}>
-        <IconLayoutGrid stroke={2} className={styles.iconColor} /> Categories
+        <Link to="/categories">
+          <IconLayoutGrid stroke={2} className={styles.iconColor} /> Categories
+        </Link>
       </a>
       <a className={styles.menuItem} href="/tvseries" onClick={menuHandler}>
-        <IconDeviceTvOld stroke={2} className={styles.iconColor} /> TV Series
+        <Link to="/tvseries">
+          <IconDeviceTvOld stroke={2} className={styles.iconColor} /> TV Series
+        </Link>
       </a>
       <a className={styles.menuItem} href="/movies" onClick={menuHandler}>
-        <IconMovie stroke={2} className={styles.iconColor} /> Movies
+        <Link to="/movies">
+          <IconMovie stroke={2} className={styles.iconColor} /> Movies
+        </Link>
       </a>
       {auth.currentUser?.uid && (
         <a className={styles.menuItem} href="/bookmarks" onClick={menuHandler}>
-          <IconBookmark stroke={2} className={styles.iconColor} /> Bookmarks
+          <Link to="/bookmarks">
+            <IconBookmark stroke={2} className={styles.iconColor} /> Bookmarks
+          </Link>
         </a>
       )}
       <a

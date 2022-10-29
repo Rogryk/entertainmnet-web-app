@@ -14,6 +14,8 @@ import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import { toggleAuthWindow } from "../../store/authSlice";
 import { setCategory } from "../../store/navigationSlice";
 import type { RootState } from "../../store/store";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface ISidebarMenuContainer {
   isSidebarMenuHidden: boolean;
@@ -23,6 +25,7 @@ interface ISidebarMenuContainer {
 const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
+  let routerNav = useNavigate();
 
   const hideSidebarHandler = () => {
     props.setIsSidebarMenuHidden((prev) => !prev);
@@ -30,6 +33,11 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
 
   const avatarClickHandler = () => {
     !authSel.isAuthWindowOpen && dispatch(toggleAuthWindow());
+  };
+
+  const homeClickHandler = () => {
+    dispatch(setCategory("home"));
+    routerNav("/home");
   };
 
   return (
@@ -42,25 +50,33 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
         <button
           type="submit"
           className={styles.homeBtn}
-          onClick={() => dispatch(setCategory("home"))}
+          onClick={homeClickHandler}
         >
-          <FontAwesomeIcon icon={faHouse} size="lg" />
+          <Link to="/home">
+            <FontAwesomeIcon icon={faHouse} size="lg" />
+          </Link>
         </button>
         <div className={styles.submenuContainer}>
           <button
             type="submit"
             onClick={() => dispatch(setCategory("categories"))}
           >
-            <IconLayoutGrid stroke={2} className={styles.iconColor} />
+            <Link to="/categories">
+              <IconLayoutGrid stroke={2} className={styles.iconColor} />
+            </Link>
           </button>
           <button
             type="submit"
             onClick={() => dispatch(setCategory("tvseries"))}
           >
-            <IconDeviceTvOld stroke={2} className={styles.iconColor} />
+            <Link to="/tvseries">
+              <IconDeviceTvOld stroke={2} className={styles.iconColor} />
+            </Link>
           </button>
           <button type="submit" onClick={() => dispatch(setCategory("movies"))}>
-            <IconMovie stroke={2} className={styles.iconColor} />
+            <Link to="/movies">
+              <IconMovie stroke={2} className={styles.iconColor} />
+            </Link>
           </button>
 
           {authSel.isAuthorized && (
@@ -68,7 +84,9 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
               type="submit"
               onClick={() => dispatch(setCategory("bookmarks"))}
             >
-              <IconBookmark stroke={2} className={styles.iconColor} />
+              <Link to="/bookmarks">
+                <IconBookmark stroke={2} className={styles.iconColor} />
+              </Link>
             </button>
           )}
         </div>

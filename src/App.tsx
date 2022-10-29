@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import styles from "./App.module.scss";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
 import MediaContainer from "./Components/Media/MediaContainer";
@@ -11,11 +12,14 @@ import {
   loginHandler,
   login,
 } from "./store/authSlice";
+import { setCategory } from "./store/navigationSlice";
+import type { UserCredentialsProps } from "./store/authSlice";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { auth } from "./utility/initFirebase";
 import { onAuthStateChanged } from "firebase/auth";
-import type { UserCredentialsProps } from "./store/authSlice";
 import AuthModal from "./Components/UI/LoginRegister/AuthModal";
+
+const SUBPAGES_LIST = ["home", "categories", "movies", "tvseries", "bookmarks"];
 
 function App() {
   const [menuState, setMenuState] = useState("home");
@@ -23,6 +27,7 @@ function App() {
   const [isPhoneWidth, setIsPhoneWidth] = useState(false);
   const appDispatch = useAppDispatch();
   const authSelector = useAppSelector((state) => state.auth);
+  let location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,20 +35,35 @@ function App() {
     };
     window.addEventListener("resize", handleResize);
     handleResize();
-    console.log(
-      Boolean(auth.currentUser?.email),
-      Boolean(authSelector.isAuthorized)
-    );
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
         appDispatch(login(auth.currentUser?.email));
         console.log("logged in");
       } else {
+        appDispatch(logoutHandler());
+
         console.log("user signed out");
       }
     });
   }, []);
+
+  // React Router listener
+  useEffect(() => {
+    if (!authSelector.isAuthorizing) {
+      const urlPath = location.pathname.slice(1);
+      if (SUBPAGES_LIST.includes(urlPath)) {
+        console.log(urlPath);
+        if (urlPath === "bookmarks") {
+          authSelector.isAuthorized
+            ? appDispatch(setCategory(urlPath))
+            : appDispatch(setCategory("home"));
+        } else {
+          appDispatch(setCategory(urlPath));
+        }
+      }
+    }
+  }, [location, authSelector.isAuthorizing]);
 
   const onLogin = (userCredentials: UserCredentialsProps) => {
     appDispatch(loginHandler(userCredentials));
@@ -80,7 +100,9 @@ function App() {
           />
         )}
         <div id="page-wrap">
-          <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
+          {!authSelector.isAuthorizing && (
+            <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
+          )}
         </div>
         {authSelector.isAuthWindowOpen && (
           <AuthModal

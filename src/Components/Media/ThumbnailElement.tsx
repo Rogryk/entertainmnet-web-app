@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import ElementContext from "../../store/element-context";
 import { toggleBookmark } from "../../store/mediaSlice";
 import { IconDeviceTvOld, IconMovie } from "@tabler/icons";
 import styles from "./ThumbnailElement.module.scss";
-import type { RootState } from "../../store/store";
-import { motion } from "framer-motion";
 import BookmarkBtn from "../UI/BookmarkBtn";
 import PlayBtn from "../UI/PlayBtn";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 
 interface IElement {
   image: string;
@@ -56,11 +56,13 @@ const Element: React.FC<IElement> = (props) => {
           <PlayBtn classNames={styles.playBtnPos} />
         </div>
 
-        <img
+        <LazyLoadImage
           src={props.image}
           alt={`thumbnail of...`}
           className={`${isHovered && styles.imgHoverEffect}`}
-        />
+          effect="opacity"
+        ></LazyLoadImage>
+
         {authSel.isAuthorized && (
           <BookmarkBtn
             isBookmarked={props.isBookmarked}
