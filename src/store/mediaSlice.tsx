@@ -1,11 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IMediaElement } from "../Components/Media/ContentContainer";
-import {
-  auth,
-  removeUserBookmark,
-  writeUserBookmark,
-} from "../utility/initFirebase";
+import { auth } from "../utility/initFirebase";
 import { AppThunk } from "./store";
 import useHttp from "../hooks/useHttp";
 

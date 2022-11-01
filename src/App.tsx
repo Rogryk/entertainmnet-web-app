@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styles from "./App.module.scss";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
 import MediaContainer from "./Components/Media/MediaContainer";
@@ -14,7 +14,6 @@ import {
 } from "./store/authSlice";
 import { setCategory } from "./store/navigationSlice";
 import type { UserCredentialsProps } from "./store/authSlice";
-import type { IuserData } from "./store/mediaSlice";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { auth } from "./utility/initFirebase";
 import { onAuthStateChanged } from "firebase/auth";
