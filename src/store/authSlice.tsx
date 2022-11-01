@@ -3,9 +3,12 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  User,
 } from "firebase/auth";
 import type { AppThunk } from "./store";
 import { setCategory } from "./navigationSlice";
+import { auth, setNewUserNode } from "../utility/initFirebase";
+import { loadUserData } from "./mediaSlice";
 
 export interface UserCredentialsProps {
   email: string;
@@ -47,24 +50,36 @@ const authSlice = createSlice({
 
 export const logoutHandler = (): AppThunk => async (dispatch, getState) => {
   const state = getState();
-
   await getAuth().signOut();
   state.nav.currentCategory === "bookmarks" && dispatch(setCategory("home"));
   dispatch(authSlice.actions.logout());
+  dispatch(loadUserData(null));
 };
 
 export const loginHandler =
   (EnteredUserCredentials: UserCredentialsProps): AppThunk =>
   async (dispatch) => {
     try {
-      const response = await signInWithEmailAndPassword(
-        getAuth(),
-        EnteredUserCredentials.email,
-        EnteredUserCredentials.password
-      );
-      const user = response.user;
-      dispatch(authSlice.actions.login(user.email));
+      let user: User | null = null;
+      // login
+      if (!auth.currentUser) {
+        const response = await signInWithEmailAndPassword(
+          getAuth(),
+          EnteredUserCredentials.email,
+          EnteredUserCredentials.password
+        );
+        user = response.user;
+      }
+
+      if (!auth.currentUser) {
+        return console.log("not logged in");
+      }
+
+      dispatch(authSlice.actions.login(auth.currentUser.email));
+      // close auth window
       dispatch(authSlice.actions.toggleAuthWindow());
+      // load user data
+      // dispatch(loadUserDataHandler(auth.currentUser.uid));
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message || "Something went wrong.");
@@ -79,12 +94,19 @@ export const registerHandler =
   async (dispatch) => {
     try {
       const response = await createUserWithEmailAndPassword(
-        getAuth(),
+        auth,
         UserRegisterCredentials.email,
         UserRegisterCredentials.password
       );
       const user = response.user;
+      setNewUserNode(user.uid, user.email);
       dispatch(authSlice.actions.login(user.email));
+      // loginHandler({
+      //   email: UserRegisterCredentials.email,
+      //   password: UserRegisterCredentials.password,
+      // });
+      // close auth window
+      // dispatch(loadUserDataHandler(user.uid));
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message || "Error: account NOT created");

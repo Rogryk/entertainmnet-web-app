@@ -6,14 +6,11 @@ import {
   IconMovie,
   IconBookmark,
   IconUserCircle,
-  IconLayoutGrid,
 } from "@tabler/icons";
 import styles from "./SidebarMenuContainer.module.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import { toggleAuthWindow } from "../../store/authSlice";
 import { setCategory } from "../../store/navigationSlice";
-import type { RootState } from "../../store/store";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -57,14 +54,14 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
           </Link>
         </button>
         <div className={styles.submenuContainer}>
-          <button
+          {/* <button
             type="submit"
             onClick={() => dispatch(setCategory("categories"))}
           >
             <Link to="/categories">
               <IconLayoutGrid stroke={2} className={styles.iconColor} />
             </Link>
-          </button>
+          </button> */}
           <button
             type="submit"
             onClick={() => dispatch(setCategory("tvseries"))}

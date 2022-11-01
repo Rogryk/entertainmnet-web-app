@@ -4,7 +4,7 @@ import styles from "./App.module.scss";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
 import MediaContainer from "./Components/Media/MediaContainer";
 import MenuContext from "./store/menu-context";
-import BurgerButton from "./Components/sidebar-menu/BurgerMenu";
+import BurgerMenu from "./Components/sidebar-menu/BurgerMenu";
 import {
   toggleAuthWindow,
   registerHandler,
@@ -14,12 +14,17 @@ import {
 } from "./store/authSlice";
 import { setCategory } from "./store/navigationSlice";
 import type { UserCredentialsProps } from "./store/authSlice";
+import type { IuserData } from "./store/mediaSlice";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { auth } from "./utility/initFirebase";
 import { onAuthStateChanged } from "firebase/auth";
 import AuthModal from "./Components/UI/LoginRegister/AuthModal";
+import useHttp from "./hooks/useHttp";
+import { loadUserData } from "./store/mediaSlice";
 
 const SUBPAGES_LIST = ["home", "categories", "movies", "tvseries", "bookmarks"];
+const FIREBASE_USERS_URL =
+  "https://web-entertainment-app-default-rtdb.firebaseio.com/users";
 
 function App() {
   const [menuState, setMenuState] = useState("home");
@@ -27,6 +32,7 @@ function App() {
   const [isPhoneWidth, setIsPhoneWidth] = useState(false);
   const appDispatch = useAppDispatch();
   const authSelector = useAppSelector((state) => state.auth);
+  const { isLoading, error, sendRequest } = useHttp();
   let location = useLocation();
 
   useEffect(() => {
@@ -35,13 +41,16 @@ function App() {
     };
     window.addEventListener("resize", handleResize);
     handleResize();
+    auth.currentUser && loadUserDataHandler(auth.currentUser.uid);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        appDispatch(login(auth.currentUser?.email));
-        console.log("logged in");
+        appDispatch(login(user.email));
+        console.log("auth state changed: logged in");
+        loadUserDataHandler(user.uid);
       } else {
         appDispatch(logoutHandler());
+        loadUserData(null);
 
         console.log("user signed out");
       }
@@ -63,9 +72,24 @@ function App() {
         }
       }
     }
-  }, [location, authSelector.isAuthorizing]);
+  }, [location, authSelector.isAuthorizing, authSelector.isAuthorized]);
+
+  const loadUserDataHandler = (uid: string) => {
+    console.log("loading user data HAAANDLER");
+    sendRequest(
+      {
+        url: `${FIREBASE_USERS_URL}/${uid}.json`,
+      },
+      dispatchUserDataHandler
+    );
+  };
+
+  const dispatchUserDataHandler = (userData: any) => {
+    appDispatch(loadUserData(userData));
+  };
 
   const onLogin = (userCredentials: UserCredentialsProps) => {
+    // login
     appDispatch(loginHandler(userCredentials));
   };
   const onLogout = () => {
@@ -94,7 +118,7 @@ function App() {
           />
         )}
         {isPhoneWidth && (
-          <BurgerButton
+          <BurgerMenu
             pageWrapId={"page-wrap"}
             outerContainerId={"outer-container"}
           />

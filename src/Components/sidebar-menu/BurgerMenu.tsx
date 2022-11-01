@@ -30,7 +30,7 @@ const BurgerButton = (props: BurgerButtonProps) => {
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
 
-  const menuHandler = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const menuHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     switch (e.currentTarget.innerText.trim()) {
       case "Home":
@@ -73,44 +73,43 @@ const BurgerButton = (props: BurgerButtonProps) => {
       onOpen={onOpenHandler}
       onClose={() => setIsMenuOpen(false)}
     >
-      <a
+      <button
+        type="submit"
         className={`${styles.menuItem} ${styles.homeBtn}`}
-        href="/"
         onClick={menuHandler}
       >
         <Link to="/home">
           <FontAwesomeIcon icon={faHouse} size="lg" /> Home
         </Link>
-      </a>
-      <a className={styles.menuItem} href="/categories" onClick={menuHandler}>
+      </button>
+      {/* <button className={styles.menuItem} onClick={menuHandler}>
         <Link to="/categories">
           <IconLayoutGrid stroke={2} className={styles.iconColor} /> Categories
         </Link>
-      </a>
-      <a className={styles.menuItem} href="/tvseries" onClick={menuHandler}>
+      </button> */}
+      <button className={styles.menuItem} onClick={menuHandler}>
         <Link to="/tvseries">
           <IconDeviceTvOld stroke={2} className={styles.iconColor} /> TV Series
         </Link>
-      </a>
-      <a className={styles.menuItem} href="/movies" onClick={menuHandler}>
+      </button>
+      <button className={styles.menuItem} onClick={menuHandler}>
         <Link to="/movies">
           <IconMovie stroke={2} className={styles.iconColor} /> Movies
         </Link>
-      </a>
+      </button>
       {auth.currentUser?.uid && (
-        <a className={styles.menuItem} href="/bookmarks" onClick={menuHandler}>
+        <button className={styles.menuItem} onClick={menuHandler}>
           <Link to="/bookmarks">
             <IconBookmark stroke={2} className={styles.iconColor} /> Bookmarks
           </Link>
-        </a>
+        </button>
       )}
-      <a
+      <button
         className={`${styles.menuItem} ${styles.userBtn}`}
-        href="/user"
         onClick={menuHandler}
       >
         <IconUserCircle stroke={2} className={styles.iconColor} /> User
-      </a>
+      </button>
     </Menu>
   );
 };

@@ -11,6 +11,7 @@ import createBasicInfoArray from "../../utility/createBasicInfoArray";
 import SearchContext from "../../store/search-context";
 import ElementContext from "../../store/element-context";
 import { loadMedia, toggleBookmark } from "../../store/mediaSlice";
+import { auth } from "../../utility/initFirebase";
 import styles from "./ContentContainer.module.scss";
 import type { RootState, AppDispatch } from "../../store/store";
 
@@ -55,6 +56,7 @@ const ContentContainer = () => {
   const searchCtx = useContext(SearchContext);
   const dispatch = useDispatch<AppDispatch>();
   const mediaSel = useAppSelector((state) => state.media.media);
+  const userDataSel = useAppSelector((state) => state.media.userData);
   const navSel = useAppSelector((state) => state.nav);
 
   const setMediaHandler = useCallback(
@@ -118,6 +120,25 @@ const ContentContainer = () => {
       });
     }
   }, [mediaSel, sendRequest]);
+
+  // Push updated user data to server
+  useEffect(() => {
+    if (isInitial && mediaSel.length > 1) {
+      isInitial = false;
+      return;
+    }
+    console.log("send user data to firebase");
+    if (mediaSel.length > 1) {
+      sendRequest({
+        url: `https://web-entertainment-app-default-rtdb.firebaseio.com/users/${auth.currentUser?.uid}.json`,
+        method: "PUT",
+        body: { ...userDataSel },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+  }, [userDataSel, sendRequest]);
 
   useEffect(() => {
     if (mediaSel) {
@@ -188,8 +209,11 @@ const ContentContainer = () => {
 
         // ### BOOKMARKS ###
         if (navSel.currentCategory === "bookmarks") {
+          if (!userDataSel) {
+            return;
+          }
           const tempBookmarked = mediaSel.filter(
-            (el) => el.isBookmarked === true
+            (el) => el.title in userDataSel.bookmarks
           );
           const bookmarkedBasicInfo = createBasicInfoArray(tempBookmarked);
           setContentToDisplay([
@@ -202,7 +226,7 @@ const ContentContainer = () => {
         }
       }
     }
-  }, [mediaSel, navSel.currentCategory, navSel.searchValue]);
+  }, [mediaSel, navSel.currentCategory, navSel.searchValue, userDataSel]);
 
   useEffect(() => {
     titleToBookmark && dispatch(toggleBookmark(titleToBookmark));

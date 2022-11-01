@@ -3,6 +3,7 @@ import Element from "./ThumbnailElement";
 import styles from "./SubcontentContainer.module.scss";
 import { IMediaBasicInfo } from "./ContentContainer";
 import { Route } from "react-router-dom";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 interface ISubcontentContainer {
   content: IMediaBasicInfo[];
@@ -11,7 +12,19 @@ interface ISubcontentContainer {
 }
 
 const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
+  const mediaSel = useAppSelector((state) => state.media);
   const theme = props.theme ? "theme" + props.theme : "themeShort";
+
+  const checkBookmarkHandler = (title: string) => {
+    if (!mediaSel.userData) {
+      return false;
+    }
+    if (title in mediaSel.userData.bookmarks) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     // <Route path={`/${props.title.replace(/\s/g, "")}`}>
@@ -27,7 +40,8 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
                 year={el.year}
                 rating={el.rating}
                 category={el.category}
-                isBookmarked={el.isBookmarked}
+                // isBookmarked={el.isBookmarked}
+                isBookmarked={checkBookmarkHandler(el.title)}
                 theme={props.theme}
                 image={process.env.PUBLIC_URL + el.smallThumbnail}
               />

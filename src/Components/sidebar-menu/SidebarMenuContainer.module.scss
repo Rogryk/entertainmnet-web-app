@@ -65,15 +65,16 @@
 }
 
 .menuItem {
-  padding: 0.55rem 5%;
-
+  width: 90%;
+  text-align: left;
   svg {
     display: inline;
   }
   &:last-child {
-    width: 90%;
+    padding: 0.55rem 5%;
     position: absolute;
     bottom: 5%;
+    width: 83%;
   }
   &:hover {
     background: lighten($color: $sidebarBgColor, $amount: 20%);

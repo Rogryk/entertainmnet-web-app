@@ -28,6 +28,8 @@ const useHttp = () => {
           throw new Error("Request failed");
         }
         const data = await response.json();
+        console.log(data);
+
         applyData && applyData(data);
       } catch (error) {
         if (error instanceof Error) {
