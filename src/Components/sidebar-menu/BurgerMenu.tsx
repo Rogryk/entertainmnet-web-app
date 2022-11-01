@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import MenuContext from "../../store/menu-context";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";

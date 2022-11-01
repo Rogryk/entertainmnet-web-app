@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import styles from "./App.module.scss";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
 import MediaContainer from "./Components/Media/MediaContainer";
-import MenuContext from "./store/menu-context";
 import BurgerMenu from "./Components/sidebar-menu/BurgerMenu";
 import {
   toggleAuthWindow,
@@ -107,35 +106,31 @@ function App() {
 
   return (
     <div className={styles.app} id="outer-container">
-      <MenuContext.Provider
-        value={{ menuState: menuState, setMenuState: setMenuState }}
-      >
-        {!isPhoneWidth && (
-          <SidebarMenuContainer
-            isSidebarMenuHidden={isSidebarHidden}
-            setIsSidebarMenuHidden={setIsSidebarHidden}
-          />
+      {!isPhoneWidth && (
+        <SidebarMenuContainer
+          isSidebarMenuHidden={isSidebarHidden}
+          setIsSidebarMenuHidden={setIsSidebarHidden}
+        />
+      )}
+      {isPhoneWidth && (
+        <BurgerMenu
+          pageWrapId={"page-wrap"}
+          outerContainerId={"outer-container"}
+        />
+      )}
+      <div id="page-wrap">
+        {!authSelector.isAuthorizing && (
+          <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
         )}
-        {isPhoneWidth && (
-          <BurgerMenu
-            pageWrapId={"page-wrap"}
-            outerContainerId={"outer-container"}
-          />
-        )}
-        <div id="page-wrap">
-          {!authSelector.isAuthorizing && (
-            <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
-          )}
-        </div>
-        {authSelector.isAuthWindowOpen && (
-          <AuthModal
-            onLogin={onLogin}
-            onLogout={onLogout}
-            onRegister={onRegister}
-            onBlur={onBlur}
-          />
-        )}
-      </MenuContext.Provider>
+      </div>
+      {authSelector.isAuthWindowOpen && (
+        <AuthModal
+          onLogin={onLogin}
+          onLogout={onLogout}
+          onRegister={onRegister}
+          onBlur={onBlur}
+        />
+      )}
     </div>
   );
 }

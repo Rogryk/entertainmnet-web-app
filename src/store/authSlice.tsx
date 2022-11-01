@@ -78,8 +78,6 @@ export const loginHandler =
       dispatch(authSlice.actions.login(auth.currentUser.email));
       // close auth window
       dispatch(authSlice.actions.toggleAuthWindow());
-      // load user data
-      // dispatch(loadUserDataHandler(auth.currentUser.uid));
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message || "Something went wrong.");
@@ -101,12 +99,6 @@ export const registerHandler =
       const user = response.user;
       setNewUserNode(user.uid, user.email);
       dispatch(authSlice.actions.login(user.email));
-      // loginHandler({
-      //   email: UserRegisterCredentials.email,
-      //   password: UserRegisterCredentials.password,
-      // });
-      // close auth window
-      // dispatch(loadUserDataHandler(user.uid));
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message || "Error: account NOT created");

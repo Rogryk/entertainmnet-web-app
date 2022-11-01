@@ -2,13 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IMediaElement } from "../Components/Media/ContentContainer";
 import { auth } from "../utility/initFirebase";
-import { AppThunk } from "./store";
-import useHttp from "../hooks/useHttp";
-
-interface Ibookmark {
-  title: string;
-  value: boolean;
-}
 
 export interface IuserData {
   bookmarks: {};
@@ -40,12 +33,7 @@ export const mediaSlice = createSlice({
     toggleBookmark(state, action: PayloadAction<string>) {
       const title = action.payload;
       const userUid = auth.currentUser?.uid;
-      console.log(userUid);
-
       if (!state.userData || !userUid) {
-        console.log("toggle returned");
-        console.log(state.userData);
-
         return;
       }
       let userBookmarksArray = Object.entries(state.userData.bookmarks);
@@ -55,7 +43,6 @@ export const mediaSlice = createSlice({
       } else {
         userBookmarksArray.push([title, true]);
       }
-      console.log("new bookmarks: ", userBookmarksArray);
 
       state.userData.bookmarks = Object.fromEntries(userBookmarksArray);
     },

@@ -6,9 +6,7 @@ import NavigationSlice, { setCategory } from "../../store/navigationSlice";
 import useHttp from "../../hooks/useHttp";
 import Content, { IMediaContentElement } from "./Content";
 import shuffle from "../../utility/arrayShuffle";
-import MenuContext from "../../store/menu-context";
 import createBasicInfoArray from "../../utility/createBasicInfoArray";
-import SearchContext from "../../store/search-context";
 import ElementContext from "../../store/element-context";
 import { loadMedia, toggleBookmark } from "../../store/mediaSlice";
 import { auth } from "../../utility/initFirebase";
@@ -52,8 +50,6 @@ const ContentContainer = () => {
   const [titleToBookmark, setTitleToBookmark] = useState("");
   const [titleToOpen, setTitleToOpen] = useState("");
 
-  const menuCtx = useContext(MenuContext);
-  const searchCtx = useContext(SearchContext);
   const dispatch = useDispatch<AppDispatch>();
   const mediaSel = useAppSelector((state) => state.media.media);
   const userDataSel = useAppSelector((state) => state.media.userData);
