@@ -27,13 +27,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     toggleAuthWindow(state) {
-      console.log("toggle");
-
       state.isAuthWindowOpen = !state.isAuthWindowOpen;
     },
 
     login(state, action) {
-      console.log("Logged in as: ", action.payload);
       state.isAuthorized = true;
       state.isAuthorizing = false;
       state.userName = action.payload;

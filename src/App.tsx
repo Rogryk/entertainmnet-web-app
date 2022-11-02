@@ -44,13 +44,10 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         appDispatch(login(user.email));
-        console.log("auth state changed: logged in");
         loadUserDataHandler(user.uid);
       } else {
         appDispatch(logoutHandler());
         loadUserData(null);
-
-        console.log("user signed out");
       }
     });
   }, []);
@@ -60,7 +57,6 @@ function App() {
     if (!authSelector.isAuthorizing) {
       const urlPath = location.pathname.slice(1);
       if (SUBPAGES_LIST.includes(urlPath)) {
-        console.log(urlPath);
         if (urlPath === "bookmarks") {
           authSelector.isAuthorized
             ? appDispatch(setCategory(urlPath))
@@ -73,7 +69,6 @@ function App() {
   }, [location, authSelector.isAuthorizing, authSelector.isAuthorized]);
 
   const loadUserDataHandler = (uid: string) => {
-    console.log("loading user data HAAANDLER");
     sendRequest(
       {
         url: `${FIREBASE_USERS_URL}/${uid}.json`,
