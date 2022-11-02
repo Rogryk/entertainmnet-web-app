@@ -1,9 +1,8 @@
 import React from "react";
-import Element from "./ThumbnailElement";
-import styles from "./SubcontentContainer.module.scss";
-import { IMediaBasicInfo } from "./ContentContainer";
-import { Route } from "react-router-dom";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import Element from "./ThumbnailElement";
+import { IMediaBasicInfo } from "./ContentContainer";
+import styles from "./SubcontentContainer.module.scss";
 
 interface ISubcontentContainer {
   content: IMediaBasicInfo[];
@@ -27,7 +26,6 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
   };
 
   return (
-    // <Route path={`/${props.title.replace(/\s/g, "")}`}>
     <div className={styles.wrapper}>
       <h2>{props.title}</h2>
       <div className={`${styles.subcontentContainer} ${styles[theme]}`}>
@@ -40,7 +38,6 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
                 year={el.year}
                 rating={el.rating}
                 category={el.category}
-                // isBookmarked={el.isBookmarked}
                 isBookmarked={checkBookmarkHandler(el.title)}
                 theme={props.theme}
                 image={process.env.PUBLIC_URL + el.smallThumbnail}
@@ -49,7 +46,6 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
           })}
       </div>
     </div>
-    // </Route>
   );
 };
 

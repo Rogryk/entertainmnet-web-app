@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import styles from "./Content.module.scss";
+import React from "react";
 import SubcontentContainer from "./SubcontentContainer";
-import ElementContext from "../../store/element-context";
+import styles from "./Content.module.scss";
 
 export interface IMediaContentElement {
   title: string;
@@ -14,8 +13,6 @@ interface IContentProps {
 }
 
 const Content: React.FC<IContentProps> = (props) => {
-  const elementCtx = useContext(ElementContext);
-
   return (
     <div className={styles.contentContainer}>
       {props.mediaContent.map((el: IMediaContentElement) => {

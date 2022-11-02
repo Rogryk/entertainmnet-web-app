@@ -1,14 +1,12 @@
-import React, { useState } from "react";
 import ContentContainer from "./ContentContainer";
 import Searchbar from "../search-bar/Searchbar";
 import styles from "./MediaContainer.module.scss";
 
-const MediaContainer = ({
-  isSidebarMenuHidden,
-}: {
+interface MediaContainerProps {
   isSidebarMenuHidden: boolean;
-}) => {
-  const [searchText, setSearchText] = useState("");
+}
+
+const MediaContainer = ({ isSidebarMenuHidden }: MediaContainerProps) => {
   return (
     <div
       className={`${styles.mediaContainer} ${

@@ -1,8 +1,5 @@
-import { useState, useEffect, useContext, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect, useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-
-import NavigationSlice, { setCategory } from "../../store/navigationSlice";
 import useHttp from "../../hooks/useHttp";
 import Content, { IMediaContentElement } from "./Content";
 import shuffle from "../../utility/arrayShuffle";
@@ -11,7 +8,6 @@ import ElementContext from "../../store/element-context";
 import { loadMedia, toggleBookmark } from "../../store/mediaSlice";
 import { auth } from "../../utility/initFirebase";
 import styles from "./ContentContainer.module.scss";
-import type { RootState, AppDispatch } from "../../store/store";
 
 export interface IMediaBasicInfo {
   title: string;
@@ -50,38 +46,39 @@ const ContentContainer = () => {
   const [titleToBookmark, setTitleToBookmark] = useState("");
   const [titleToOpen, setTitleToOpen] = useState("");
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const mediaSel = useAppSelector((state) => state.media.media);
   const userDataSel = useAppSelector((state) => state.media.userData);
   const navSel = useAppSelector((state) => state.nav);
 
   const setMediaHandler = useCallback(
     (fetchedData: IMediaElement[]) => {
-      const temp = fetchedData.map((el: IMediaElement) => {
-        el.thumbnail.regular.large = el.thumbnail.regular.large.replace(
-          "./assets/",
-          ""
-        );
-        el.thumbnail.regular.medium = el.thumbnail.regular.medium?.replace(
-          "./assets/",
-          ""
-        );
-        el.thumbnail.regular.small = el.thumbnail.regular.small.replace(
-          "./assets/",
-          ""
-        );
-        if (el.thumbnail.trending) {
-          el.thumbnail.trending.small = el.thumbnail.trending.small.replace(
-            "./assets/",
-            ""
-          );
-          el.thumbnail.trending.large = el.thumbnail.trending.large.replace(
-            "./assets/",
-            ""
-          );
-        }
-        return el;
-      });
+      // code to transform provided data, single use only
+      // const temp = fetchedData.map((el: IMediaElement) => {
+      //   el.thumbnail.regular.large = el.thumbnail.regular.large.replace(
+      //     "./assets/",
+      //     ""
+      //   );
+      //   el.thumbnail.regular.medium = el.thumbnail.regular.medium?.replace(
+      //     "./assets/",
+      //     ""
+      //   );
+      //   el.thumbnail.regular.small = el.thumbnail.regular.small.replace(
+      //     "./assets/",
+      //     ""
+      //   );
+      //   if (el.thumbnail.trending) {
+      //     el.thumbnail.trending.small = el.thumbnail.trending.small.replace(
+      //       "./assets/",
+      //       ""
+      //     );
+      //     el.thumbnail.trending.large = el.thumbnail.trending.large.replace(
+      //       "./assets/",
+      //       ""
+      //     );
+      //   }
+      //   return el;
+      // });
       dispatch(loadMedia(fetchedData));
     },
     [dispatch]
@@ -123,7 +120,6 @@ const ContentContainer = () => {
       isInitial = false;
       return;
     }
-    console.log("send user data to firebase");
     if (mediaSel.length > 1) {
       sendRequest({
         url: `https://web-entertainment-app-default-rtdb.firebaseio.com/users/${auth.currentUser?.uid}.json`,
@@ -140,7 +136,6 @@ const ContentContainer = () => {
     if (mediaSel) {
       // ### SEARCH ###
       if (navSel.searchValue) {
-        console.log("search");
         const tempSearched = mediaSel.filter((el) =>
           el.title.toLowerCase().includes(navSel.searchValue.toLowerCase())
         );
