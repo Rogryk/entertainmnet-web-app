@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import styles from "./Searchbar.module.scss";
 import { IconSearch } from "@tabler/icons";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setSearchValue } from "../../store/navigationSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import styles from "./Searchbar.module.scss";
 
 const SearchBar = () => {
   const appDispatch = useAppDispatch();
