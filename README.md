@@ -1,6 +1,6 @@
 # About project
 
-Project inspired by frontendmentor.io challenge, link below. 
+Imitation of VOD App inspired by frontendmentor.io challenge, link below. 
 
 Users are able to: 
 - search media from search bar,
