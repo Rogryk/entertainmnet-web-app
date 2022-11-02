@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { toggleAuthWindow } from "../../store/authSlice";
 import { setCategory } from "../../store/navigationSlice";
@@ -12,10 +11,8 @@ import {
   IconMovie,
   IconBookmark,
   IconUserCircle,
-  IconLayoutGrid,
 } from "@tabler/icons";
 import "./BurgerMenuDefault.scss";
-
 import styles from "./SidebarMenuContainer.module.scss";
 
 interface BurgerButtonProps {
@@ -23,9 +20,8 @@ interface BurgerButtonProps {
   outerContainerId: String;
 }
 
-const BurgerButton = (props: BurgerButtonProps) => {
+const BurgerMenu = (props: BurgerButtonProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const auth = getAuth();
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
 
@@ -58,9 +54,6 @@ const BurgerButton = (props: BurgerButtonProps) => {
     }
     setIsMenuOpen(false);
   };
-  const onOpenHandler = () => {
-    setIsMenuOpen(true);
-  };
 
   return (
     <Menu
@@ -69,11 +62,10 @@ const BurgerButton = (props: BurgerButtonProps) => {
       pageWrapId={props.pageWrapId}
       outerContainerId={props.outerContainerId}
       isOpen={isMenuOpen}
-      onOpen={onOpenHandler}
+      onOpen={() => setIsMenuOpen(true)}
       onClose={() => setIsMenuOpen(false)}
     >
       <button
-        type="submit"
         className={`${styles.menuItem} ${styles.homeBtn}`}
         onClick={menuHandler}
       >
@@ -81,11 +73,6 @@ const BurgerButton = (props: BurgerButtonProps) => {
           <FontAwesomeIcon icon={faHouse} size="lg" /> Home
         </Link>
       </button>
-      {/* <button className={styles.menuItem} onClick={menuHandler}>
-        <Link to="/categories">
-          <IconLayoutGrid stroke={2} className={styles.iconColor} /> Categories
-        </Link>
-      </button> */}
       <button className={styles.menuItem} onClick={menuHandler}>
         <Link to="/tvseries">
           <IconDeviceTvOld stroke={2} className={styles.iconColor} /> TV Series
@@ -96,7 +83,7 @@ const BurgerButton = (props: BurgerButtonProps) => {
           <IconMovie stroke={2} className={styles.iconColor} /> Movies
         </Link>
       </button>
-      {auth.currentUser?.uid && (
+      {authSel.isAuthorized && (
         <button className={styles.menuItem} onClick={menuHandler}>
           <Link to="/bookmarks">
             <IconBookmark stroke={2} className={styles.iconColor} /> Bookmarks
@@ -113,4 +100,4 @@ const BurgerButton = (props: BurgerButtonProps) => {
   );
 };
 
-export default BurgerButton;
+export default BurgerMenu;

@@ -7,26 +7,21 @@ import {
   IconBookmark,
   IconUserCircle,
 } from "@tabler/icons";
-import styles from "./SidebarMenuContainer.module.scss";
-import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import { toggleAuthWindow } from "../../store/authSlice";
 import { setCategory } from "../../store/navigationSlice";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
+import styles from "./SidebarMenuContainer.module.scss";
 
-interface ISidebarMenuContainer {
+interface SidebarMenuContainerProps {
   isSidebarMenuHidden: boolean;
   setIsSidebarMenuHidden: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
+const SidebarMenuContainer = (props: SidebarMenuContainerProps) => {
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
-  let routerNav = useNavigate();
-
-  const hideSidebarHandler = () => {
-    props.setIsSidebarMenuHidden((prev) => !prev);
-  };
+  const routerNav = useNavigate();
 
   const avatarClickHandler = () => {
     !authSel.isAuthWindowOpen && dispatch(toggleAuthWindow());
@@ -41,7 +36,7 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
     <>
       <div
         className={`${styles.sidebarMenuContainer} ${
-          props.isSidebarMenuHidden ? styles.hidden : ""
+          props.isSidebarMenuHidden && styles.hidden
         }`}
       >
         <button
@@ -54,14 +49,6 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
           </Link>
         </button>
         <div className={styles.submenuContainer}>
-          {/* <button
-            type="submit"
-            onClick={() => dispatch(setCategory("categories"))}
-          >
-            <Link to="/categories">
-              <IconLayoutGrid stroke={2} className={styles.iconColor} />
-            </Link>
-          </button> */}
           <button
             type="submit"
             onClick={() => dispatch(setCategory("tvseries"))}
@@ -98,7 +85,7 @@ const SidebarMenuContainer = (props: ISidebarMenuContainer) => {
         <button
           type="submit"
           className={`${styles.visibilityBtn} `}
-          onClick={() => hideSidebarHandler()}
+          onClick={() => props.setIsSidebarMenuHidden((prev) => !prev)}
         >
           {`${props.isSidebarMenuHidden ? ">" : "<"}`}
         </button>
