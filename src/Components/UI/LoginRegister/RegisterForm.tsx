@@ -1,7 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import styles from "./RegisterForm.module.scss";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import Button from "../Button";
+import { getAuth } from "firebase/auth";
 import type { UserCredentialsProps } from "../../../store/authSlice";
+import styles from "./RegisterForm.module.scss";
 
 interface IFormInput {
   email: string;
@@ -84,9 +85,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
           <p className={styles.error}>{errors.cpassword.message}</p>
         )}
       </div>
-      <button type="submit" onClick={() => {}}>
-        Register
-      </button>
+      <Button onClick={() => {}}>Register</Button>
     </form>
   );
 };

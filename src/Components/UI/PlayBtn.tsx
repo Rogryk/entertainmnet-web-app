@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./PlayBtn.module.scss";
 import { IconPlayerPlay } from "@tabler/icons";
 

@@ -1,7 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./LoginForm.module.scss";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { UserCredentialsProps } from "../../../store/authSlice";
+import Button from "../Button";
 
 interface LoginFormProps {
   onLogin: (userCredentials: UserCredentialsProps) => void;
@@ -47,10 +48,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
           })}
         />
       </div>
-
-      <button type="submit" onClick={() => {}}>
-        Login
-      </button>
+      <Button onClick={() => {}}>Login</Button>
     </form>
   );
 };

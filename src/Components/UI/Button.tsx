@@ -1,10 +1,9 @@
-import React from "react";
 import styles from "../UI/BookmarkBtn.module.scss";
 
 interface ButtonProps {
   onClick: () => void;
   type?: string;
-  childNodes?: any;
+  children?: React.ReactNode;
   classList?: string;
 }
 
@@ -16,7 +15,7 @@ const Button = (props: ButtonProps) => {
       onClick={() => props.onClick()}
       autoFocus={true}
     >
-      Logout
+      {props.children}
     </button>
   );
 };
