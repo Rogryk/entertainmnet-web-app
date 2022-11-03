@@ -9,7 +9,7 @@ import {
 } from "@tabler/icons";
 import { toggleAuthWindow } from "../../store/authSlice";
 import { setCategory } from "../../store/navigationSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import styles from "./SidebarMenuContainer.module.scss";
 
@@ -21,15 +21,9 @@ interface SidebarMenuContainerProps {
 const SidebarMenuContainer = (props: SidebarMenuContainerProps) => {
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
-  const routerNav = useNavigate();
 
   const avatarClickHandler = () => {
     !authSel.isAuthWindowOpen && dispatch(toggleAuthWindow());
-  };
-
-  const homeClickHandler = () => {
-    dispatch(setCategory("home"));
-    routerNav("/home");
   };
 
   return (
@@ -42,7 +36,7 @@ const SidebarMenuContainer = (props: SidebarMenuContainerProps) => {
         <button
           type="submit"
           className={styles.homeBtn}
-          onClick={homeClickHandler}
+          onClick={() => dispatch(setCategory("home"))}
         >
           <Link to="/home">
             <FontAwesomeIcon icon={faHouse} size="lg" />
