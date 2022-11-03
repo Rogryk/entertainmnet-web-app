@@ -22,11 +22,11 @@ export const mediaSlice = createSlice({
   name: "media",
   initialState,
   reducers: {
-    loadMedia(state, action: PayloadAction<any>) {
+    loadMedia(state, action: PayloadAction<IMediaElement[]>) {
       state.media = action.payload;
     },
 
-    loadUserData(state, action: PayloadAction<any>) {
+    loadUserData(state, action: PayloadAction<IuserData>) {
       state.userData = action.payload;
     },
 
