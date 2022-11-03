@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./App.module.scss";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
 import MediaContainer from "./Components/Media/MediaContainer";
@@ -29,9 +29,11 @@ function App() {
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
   const [isPhoneWidth, setIsPhoneWidth] = useState(false);
   const appDispatch = useAppDispatch();
+  const navSel = useAppSelector((state) => state.nav);
   const authSelector = useAppSelector((state) => state.auth);
   const { isLoading, error, sendRequest } = useHttp();
   let location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,14 +58,13 @@ function App() {
   useEffect(() => {
     if (!authSelector.isAuthorizing) {
       const urlPath = location.pathname.slice(1);
-      if (SUBPAGES_LIST.includes(urlPath)) {
-        if (urlPath === "bookmarks") {
-          authSelector.isAuthorized
-            ? appDispatch(setCategory(urlPath))
-            : appDispatch(setCategory("home"));
-        } else {
-          appDispatch(setCategory(urlPath));
-        }
+      if (!SUBPAGES_LIST.includes(urlPath)) {
+        return;
+      }
+      if (urlPath === "bookmarks") {
+        !authSelector.isAuthorized && navigate(`/home`);
+      } else {
+        appDispatch(setCategory(urlPath));
       }
     }
   }, [location, authSelector.isAuthorizing, authSelector.isAuthorized]);
