@@ -13,6 +13,7 @@ import {
 } from "./store/authSlice";
 import { setCategory } from "./store/navigationSlice";
 import type { UserCredentialsProps } from "./store/authSlice";
+import type { IuserData } from "./store/mediaSlice";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { auth } from "./utility/initFirebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -25,11 +26,9 @@ const FIREBASE_USERS_URL =
   "https://web-entertainment-app-default-rtdb.firebaseio.com/users";
 
 function App() {
-  const [menuState, setMenuState] = useState("home");
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
   const [isPhoneWidth, setIsPhoneWidth] = useState(false);
   const appDispatch = useAppDispatch();
-  const navSel = useAppSelector((state) => state.nav);
   const authSelector = useAppSelector((state) => state.auth);
   const { isLoading, error, sendRequest } = useHttp();
   let location = useLocation();
@@ -77,7 +76,7 @@ function App() {
     );
   };
 
-  const dispatchUserDataHandler = (userData: any) => {
+  const dispatchUserDataHandler = (userData: IuserData) => {
     appDispatch(loadUserData(userData));
   };
 
