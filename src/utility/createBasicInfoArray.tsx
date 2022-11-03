@@ -1,6 +1,7 @@
+import type { IMediaElement } from "../Components/Media/ContentContainer";
+
 function createBasicInfoArray(
-  this: any,
-  array: any[],
+  array: IMediaElement[],
   thumbnail?: "regular" | "trending"
 ) {
   const thumbnailType = thumbnail ? thumbnail : "regular";
@@ -15,7 +16,7 @@ function createBasicInfoArray(
       smallThumbnail:
         thumbnailType === "regular"
           ? el.thumbnail.regular.small
-          : el.thumbnail.trending.small,
+          : el.thumbnail.trending?.small,
     };
   });
 
