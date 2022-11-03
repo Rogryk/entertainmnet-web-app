@@ -50,7 +50,7 @@ export const logoutHandler = (): AppThunk => async (dispatch, getState) => {
   await getAuth().signOut();
   state.nav.currentCategory === "bookmarks" && dispatch(setCategory("home"));
   dispatch(authSlice.actions.logout());
-  dispatch(loadUserData(null));
+  dispatch(loadUserData({ bookmarks: { "0": false }, email: "" }));
 };
 
 export const loginHandler =
