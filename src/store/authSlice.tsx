@@ -96,6 +96,7 @@ export const registerHandler =
       const user = response.user;
       setNewUserNode(user.uid, user.email);
       dispatch(authSlice.actions.login(user.email));
+      dispatch(toggleAuthWindow());
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message || "Error: account NOT created");
