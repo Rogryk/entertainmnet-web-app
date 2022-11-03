@@ -49,7 +49,6 @@ function App() {
         loadUserDataHandler(user.uid);
       } else {
         appDispatch(logoutHandler());
-        loadUserData(null);
       }
     });
   }, []);
