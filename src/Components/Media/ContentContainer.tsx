@@ -4,8 +4,7 @@ import useHttp from "../../hooks/useHttp";
 import Content, { IMediaContentElement } from "./Content";
 import shuffle from "../../utility/arrayShuffle";
 import createBasicInfoArray from "../../utility/createBasicInfoArray";
-import ElementContext from "../../store/element-context";
-import { loadMedia, toggleBookmark } from "../../store/mediaSlice";
+import { loadMedia } from "../../store/mediaSlice";
 import { auth } from "../../utility/initFirebase";
 import styles from "./ContentContainer.module.scss";
 
@@ -219,23 +218,10 @@ const ContentContainer = () => {
     }
   }, [mediaSel, navSel.currentCategory, navSel.searchValue, userDataSel]);
 
-  useEffect(() => {
-    titleToBookmark && dispatch(toggleBookmark(titleToBookmark));
-  }, [titleToBookmark]);
-
   return (
     <>
-      {!isLoading && !error && (
-        <ElementContext.Provider
-          value={{
-            titleToBookmark,
-            setTitleToBookmark,
-            titleToOpen,
-            setTitleToOpen,
-          }}
-        >
-          {contentToDisplay && <Content mediaContent={contentToDisplay} />}
-        </ElementContext.Provider>
+      {!isLoading && !error && contentToDisplay && (
+        <Content mediaContent={contentToDisplay} />
       )}
       <div className={styles.stateDisplay}>
         {isLoading && "Loading data..."}

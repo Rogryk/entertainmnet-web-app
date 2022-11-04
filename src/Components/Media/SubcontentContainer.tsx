@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import Element from "./ThumbnailElement";
 import { IMediaBasicInfo } from "./ContentContainer";
@@ -49,4 +49,4 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
   );
 };
 
-export default SubcontentContainer;
+export default memo(SubcontentContainer);
