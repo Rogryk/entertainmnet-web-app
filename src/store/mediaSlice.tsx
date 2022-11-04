@@ -27,7 +27,11 @@ export const mediaSlice = createSlice({
     },
 
     loadUserData(state, action: PayloadAction<IuserData>) {
-      state.userData = action.payload;
+      if (action.payload === null) {
+        state.userData = { bookmarks: { "0": false }, email: "" };
+      } else {
+        state.userData = action.payload;
+      }
     },
 
     toggleBookmark(state, action: PayloadAction<string>) {
