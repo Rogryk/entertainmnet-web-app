@@ -26,7 +26,6 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   const auth = getAuth();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
     onRegister({ email: data.email, password: data.password });
   };
 
