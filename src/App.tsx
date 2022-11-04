@@ -41,8 +41,7 @@ function App() {
     window.addEventListener("resize", handleResize);
     handleResize();
     auth.currentUser && loadUserDataHandler(auth.currentUser.uid);
-
-    onAuthStateChanged(auth, (user) => {
+    const subscribeUser = onAuthStateChanged(auth, (user) => {
       if (user) {
         appDispatch(login(user.email));
         loadUserDataHandler(user.uid);
@@ -50,6 +49,7 @@ function App() {
         appDispatch(logoutHandler());
       }
     });
+    return subscribeUser;
   }, []);
 
   // React Router listener
@@ -67,8 +67,8 @@ function App() {
     }
   }, [location, authSelector.isAuthorizing, authSelector.isAuthorized]);
 
-  const loadUserDataHandler = (uid: string) => {
-    sendRequest(
+  const loadUserDataHandler = async (uid: string) => {
+    await sendRequest(
       {
         url: `${FIREBASE_USERS_URL}/${uid}.json`,
       },
