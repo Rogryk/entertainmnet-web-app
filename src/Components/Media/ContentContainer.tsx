@@ -196,27 +196,29 @@ const ContentContainer = () => {
             { title: "Movies", theme: "Short", content: movieBasicInfo },
           ]);
         }
-
-        // ### BOOKMARKS ###
-        if (navSel.currentCategory === "bookmarks") {
-          if (!userDataSel) {
-            return;
-          }
-          const tempBookmarked = mediaSel.filter(
-            (el) => el.title in userDataSel.bookmarks
-          );
-          const bookmarkedBasicInfo = createBasicInfoArray(tempBookmarked);
-          setContentToDisplay([
-            {
-              title: "Bookmarks",
-              theme: "Short",
-              content: bookmarkedBasicInfo,
-            },
-          ]);
-        }
       }
     }
-  }, [mediaSel, navSel.currentCategory, navSel.searchValue, userDataSel]);
+  }, [mediaSel, navSel.currentCategory, navSel.searchValue]);
+
+  useEffect(() => {
+    // ### BOOKMARKS ###
+    if (navSel.currentCategory === "bookmarks") {
+      if (!userDataSel) {
+        return;
+      }
+      const tempBookmarked = mediaSel.filter(
+        (el) => el.title in userDataSel.bookmarks
+      );
+      const bookmarkedBasicInfo = createBasicInfoArray(tempBookmarked);
+      setContentToDisplay([
+        {
+          title: "Bookmarks",
+          theme: "Short",
+          content: bookmarkedBasicInfo,
+        },
+      ]);
+    }
+  }, [mediaSel, navSel.currentCategory, userDataSel]);
 
   return (
     <>
