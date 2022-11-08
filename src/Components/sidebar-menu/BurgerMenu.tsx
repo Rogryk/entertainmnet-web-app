@@ -102,7 +102,7 @@ const BurgerMenu = (props: BurgerButtonProps) => {
           </Link>
         </button>
       )}
-      <button className={`userButton ${styles.effects}`} onClick={menuHandler}>
+      <button className={`user-button ${styles.effects}`} onClick={menuHandler}>
         <Link to="/auth">
           <IconUserCircle stroke={2} size={iconSize} /> User
         </Link>
