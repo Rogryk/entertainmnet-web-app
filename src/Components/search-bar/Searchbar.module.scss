@@ -1,29 +1,7 @@
-@import "../../layout/layout";
+@use "../../sass/base";
 
-$height: 40px;
-$width: 400px;
-$widthPhone: 60%;
-$fontSize: 1.35rem;
-
-.searchbar {
-  padding-left: 5px;
-  height: $height;
-  width: $width;
+.styles {
   background: transparent;
-  display: flex;
-  justify-content: space-between;
-  color: whitesmoke;
-  font-size: $fontSize;
-  align-items: center;
-  @media screen and (max-width: $breakpointPhone) {
-    width: $widthPhone;
-  }
-}
-
-.input {
-  width: 90%;
-  background: inherit;
-  &:focus-visible {
-    outline: none;
-  }
+  color: base.$text-color;
+  font-size: 1.35rem;
 }

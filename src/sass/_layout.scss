@@ -9,6 +9,12 @@
   background: base.$primary-color;
 }
 
+// Resets
+input {
+  outline: none;
+  background-color: transparent;
+}
+
 // Sidebar Component
 .sidebar {
   display: flex;
@@ -46,5 +52,26 @@
 
   @media screen and (max-width: base.$phone-breakpoint) {
     visibility: hidden;
+  }
+}
+
+// Searchbar Component
+.searchbar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.5rem;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+
+  &.position {
+    padding-left: 5px;
+  }
+  &.dimensions {
+    width: base.$searchbar-width-pc;
+    height: base.$searchbar-height;
+    @media screen and (max-width: base.$phone-breakpoint) {
+      width: base.$searchbar-width-phone;
+    }
   }
 }

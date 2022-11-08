@@ -8,10 +8,12 @@ const SearchBar = () => {
   const navSel = useAppSelector((state) => state.nav);
 
   return (
-    <div className={styles.searchbar}>
+    <section
+      role="search"
+      className={`searchbar position dimensions ${styles.styles}`}
+    >
       <IconSearch className={styles.icon} />
       <input
-        className={styles.input}
         type="text"
         name="searchbar"
         id="searchbar"
@@ -19,7 +21,7 @@ const SearchBar = () => {
         value={navSel.searchValue}
         onChange={(event) => appDispatch(setSearchValue(event.target.value))}
       />
-    </div>
+    </section>
   );
 };
 
