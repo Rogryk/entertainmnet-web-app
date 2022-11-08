@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from "./App.module.scss";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
 import MediaContainer from "./Components/Media/MediaContainer";
 import BurgerMenu from "./Components/sidebar-menu/BurgerMenu";
@@ -20,6 +19,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import AuthModal from "./Components/UI/LoginRegister/AuthModal";
 import useHttp from "./hooks/useHttp";
 import { loadUserData } from "./store/mediaSlice";
+import "./sass/main.scss";
 
 const SUBPAGES_LIST = ["home", "categories", "movies", "tvseries", "bookmarks"];
 const FIREBASE_USERS_URL =
@@ -99,7 +99,7 @@ function App() {
   };
 
   return (
-    <div className={styles.app} id="outer-container">
+    <div className={"app"} id="outer-container">
       {!isPhoneWidth && (
         <SidebarMenuContainer
           isSidebarMenuHidden={isSidebarHidden}
