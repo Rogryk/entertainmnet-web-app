@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./LoginForm.module.scss";
 import { getAuth } from "firebase/auth";
 import { UserCredentialsProps } from "../../../store/authSlice";
-import Button from "../Button";
+import Button from "../AuthButton";
 
 interface LoginFormProps {
   onLogin: (userCredentials: UserCredentialsProps) => void;

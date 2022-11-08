@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Logout.module.scss";
-import Button from "../Button";
+import Button from "../AuthButton";
 
 interface LogoutProps {
   logoutHandler: any;

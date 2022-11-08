@@ -1,5 +1,3 @@
-import styles from "../UI/BookmarkBtn.module.scss";
-
 interface ButtonProps {
   onClick: () => void;
   type?: string;
@@ -10,7 +8,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
   return (
     <button
-      className={styles.authContainer}
+      className={"authButton"}
       type="submit"
       onClick={() => props.onClick()}
       autoFocus={true}

@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import Button from "../Button";
+import Button from "../AuthButton";
 import { getAuth } from "firebase/auth";
 import type { UserCredentialsProps } from "../../../store/authSlice";
 import styles from "./RegisterForm.module.scss";

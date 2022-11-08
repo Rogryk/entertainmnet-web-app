@@ -1,5 +1,21 @@
 @use "base";
 
+.authButton {
+  &.dimensions {
+    border-radius: base.$auth-button-border-radius;
+  }
+  &.styles {
+    background-color: base.$button-red !important;
+    font-size: 1.5rem;
+    &:hover {
+      background-color: darken(
+        $color: base.$button-red,
+        $amount: base.$darken-amount
+      ) !important;
+    }
+  }
+}
+
 .playButton {
   &.dimensions {
     @include base.circle-setup(base.$play-button-diameter);
