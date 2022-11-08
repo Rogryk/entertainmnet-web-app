@@ -31,7 +31,7 @@ $sidebar-buttons-gap: 10px;
 $menu-hide-time: 1s;
 $button-hover-time: 0.35s;
 $lighten-amount: 40%;
-$darken-amount: 10%;
+$darken-amount: 15%;
 
 // breakpoints
 $phone-breakpoint: 490px;
@@ -144,6 +144,18 @@ $uiWhite: rgba(255, 255, 255, 1);
   min-width: $size;
 }
 // end of old mixins file
+
+@mixin hoverEffect($colorEffect) {
+  &:hover {
+    @include ease-in-out($button-hover-time);
+    @if $colorEffect == "lighten" {
+      color: lighten($color: $button-white, $amount: $lighten-amount);
+    }
+    @if ($colorEffect == "darken") {
+      color: darken($color: $button-red, $amount: $darken-amount);
+    }
+  }
+}
 
 // start of burger menu defualts
 /* Position and sizing of burger button */

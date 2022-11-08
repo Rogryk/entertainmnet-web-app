@@ -12,8 +12,7 @@ import {
   IconBookmark,
   IconUserCircle,
 } from "@tabler/icons";
-import "./BurgerMenuDefault.scss";
-import styles from "./SidebarMenuContainer.module.scss";
+import styles from "./BurgerMenu.module.scss";
 
 interface BurgerButtonProps {
   pageWrapId: String;
@@ -24,6 +23,7 @@ const BurgerMenu = (props: BurgerButtonProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
+  const iconSize = "2.4rem";
 
   const menuHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -66,35 +66,46 @@ const BurgerMenu = (props: BurgerButtonProps) => {
       onClose={() => setIsMenuOpen(false)}
     >
       <button
-        className={`${styles.menuItem} ${styles.homeBtn}`}
+        className={`${styles.effects} ${styles.homeButton} `}
         onClick={menuHandler}
       >
         <Link to="/home">
-          <FontAwesomeIcon icon={faHouse} size="lg" /> Home
+          <FontAwesomeIcon icon={faHouse} fontSize={iconSize} />
+          Home
         </Link>
       </button>
-      <button className={styles.menuItem} onClick={menuHandler}>
+      <button className={styles.effects} onClick={menuHandler}>
         <Link to="/tvseries">
-          <IconDeviceTvOld stroke={2} className={styles.iconColor} /> TV Series
+          <IconDeviceTvOld
+            stroke={2}
+            className={styles.iconColor}
+            size={iconSize}
+          />{" "}
+          TV Series
         </Link>
       </button>
-      <button className={styles.menuItem} onClick={menuHandler}>
+      <button className={styles.effects} onClick={menuHandler}>
         <Link to="/movies">
-          <IconMovie stroke={2} className={styles.iconColor} /> Movies
+          <IconMovie stroke={2} className={styles.iconColor} size={iconSize} />{" "}
+          Movies
         </Link>
       </button>
       {authSel.isAuthorized && (
-        <button className={styles.menuItem} onClick={menuHandler}>
+        <button className={styles.effects} onClick={menuHandler}>
           <Link to="/bookmarks">
-            <IconBookmark stroke={2} className={styles.iconColor} /> Bookmarks
+            <IconBookmark
+              stroke={2}
+              className={styles.iconColor}
+              size={iconSize}
+            />{" "}
+            Bookmarks
           </Link>
         </button>
       )}
-      <button
-        className={`${styles.menuItem} ${styles.userBtn}`}
-        onClick={menuHandler}
-      >
-        <IconUserCircle stroke={2} className={styles.iconColor} /> User
+      <button className={`userButton ${styles.effects}`} onClick={menuHandler}>
+        <Link to="/auth">
+          <IconUserCircle stroke={2} size={iconSize} /> User
+        </Link>
       </button>
     </Menu>
   );

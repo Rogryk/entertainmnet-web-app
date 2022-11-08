@@ -1,5 +1,7 @@
-@import "../../layout/layout";
+@use "base";
+// Class naming convention changed to match provided react-burger-menu component
 
+// Burger Menu Default CSS
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
@@ -12,23 +14,27 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: darken($color: $uiWhite, $amount: 30%);
+  background: base.$button-white;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: $uiRed;
+  background: base.$button-red;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 24px;
-  width: 24px;
+  margin: 5px 10px;
+  width: 34px !important;
+  height: 34px !important;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: darken($color: $uiWhite, $amount: 30%);
+  background: base.$button-white;
+  font-size: 2rem;
+  width: 5px !important;
+  height: 32px !important;
 }
 
 /*
@@ -42,7 +48,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: $sidebarBgColor;
+  background: base.$secondary-color;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
   width: 100%;
@@ -55,23 +61,32 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: darken($color: $uiWhite, $amount: 20%);
+  color: base.$button-white;
   padding: 0.8em;
   position: relative;
 }
 
 /* Individual item */
 .bm-item {
-  display: inline-block;
+  width: 100%;
+  font-size: 2rem;
   a {
-    display: block;
-    padding: 0.55rem 5%;
-    width: 100%;
-    height: 100%;
+    display: inline-grid;
+    grid-template-columns: max-content max-content;
+    column-gap: 1rem;
+    align-items: center;
+  }
+  svg {
+    @include base.flexCenter();
   }
 }
 
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+.userButton {
+  position: absolute;
+  bottom: 5%;
 }
