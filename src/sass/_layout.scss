@@ -1,0 +1,61 @@
+@use "base";
+
+// // colors
+// $mainBgColor: rgb(16, 20, 31);
+// $sidebarBgColor: rgb(22, 29, 47);
+// $buttonColor: rgba(248, 253, 254, 0.5);
+// $uiRed: rgba(254, 69, 75, 0.75);
+// $uiWhite: rgba(255, 255, 255, 1);
+
+// //breakpoints
+// $breakpointThin1: 830px; // main media container
+// $breakpointPhone: 490px;
+
+// Main App Component
+.app {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background: base.$primary-color;
+}
+
+// Sidebar Component
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &.position {
+    position: fixed;
+    margin: base.$margin-top 0 0 1.85rem;
+    padding: 20px;
+  }
+  &.dimensions {
+    border-radius: 14px;
+    width: base.$sidebar-width;
+    height: base.$sidebar-height;
+    min-height: base.$sidebar-height-min;
+    z-index: 99;
+  }
+  &.hidden {
+    margin-left: calc(base.$sidebar-hide-button-width - base.$sidebar-width);
+  }
+  .buttonsContainer {
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+  }
+  .toggleVisibilityButton {
+    @include base.absCenterVertically;
+    right: 0.1rem;
+    border-radius: 4px;
+    width: 10px;
+    height: 150px;
+  }
+
+  @media screen and (max-width: base.$phone-breakpoint) {
+    visibility: hidden;
+  }
+}

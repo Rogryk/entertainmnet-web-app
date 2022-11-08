@@ -1,120 +1,35 @@
-@import "../../layout/mixins";
-@import "../../layout/layout";
+@use "../../sass/base";
+@use "../../sass/layout";
 
-.sidebarMenuContainer {
-  position: fixed;
-  top: $marginTop;
-  margin: 0 1.85rem;
-  padding: 20px;
-  border-radius: 14px;
-  width: $sidebarWidth;
-  height: $sidebarHeight;
-  min-height: $sidebarMinHeight;
-  background: $sidebarBgColor;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: ease-in-out;
-  transition-duration: 1s;
-  z-index: 99;
+.sidebarStyles {
+  background: base.$secondary-color;
   button {
-    transition: ease-in-out;
-    transition-duration: 0.35s;
+    @include base.flex-center;
+    color: base.$button-white;
+    margin: base.$sidebar-buttons-gap 0;
   }
-  @media screen and (max-width: $breakpointPhone) {
-    visibility: hidden;
-  }
-}
 
-.hidden {
-  margin-left: calc(12px - $sidebarWidth);
-}
-
-.homeBtn {
-  color: $uiRed;
-  &:hover {
-    color: darken($color: $uiRed, $amount: 20%);
-  }
-}
-
-.submenuContainer {
-  @include absCenterHorizontally;
-  top: 10%;
-  display: flex;
-  flex-direction: column;
-  button {
-    @include flexCenter;
-    color: $buttonColor;
-    margin: 10px 0;
-  }
-  @media (max-height: 500px) {
-    top: 18%;
-  }
-}
-
-.userBtn {
-  margin: 0 auto;
-  color: $buttonColor;
-}
-
-.iconColor {
-  transition: ease-in-out;
-  transition-duration: 0.35s;
-  &:hover {
-    color: transparentize($color: white, $amount: 0.2);
-  }
-}
-
-.menuItem {
-  width: 90%;
-  text-align: left;
-  svg {
-    display: inline;
-  }
-  &:last-child {
-    padding: 0.55rem 5%;
-    position: absolute;
-    bottom: 5%;
-    width: 83%;
-  }
-  &:hover {
-    background: lighten($color: $sidebarBgColor, $amount: 20%);
-  }
-}
-
-.visibilityBtn {
-  @include absCenterVertically;
-  right: 0.1rem;
-  border-radius: 4px;
-  width: 10px;
-  height: 150px;
-  color: $buttonColor;
-  &:hover {
-    background-color: lighten($color: $sidebarBgColor, $amount: 10%);
-  }
-}
-
-.userAction {
-  position: absolute;
-  left: 0;
-  bottom: 10%;
-  width: 100px;
-  height: 50px;
-  display: flex;
-  flex-direction: column;
-  background: $sidebarBgColor;
-  color: white;
-  button {
+  .homeButton {
+    color: base.$button-red;
     &:hover {
-      background: lighten($color: $sidebarBgColor, $amount: 10%);
+      color: darken($color: base.$button-red, $amount: base.$darken-amount);
     }
   }
 }
 
-.validateFormWrapper {
-  @include absCenterXY();
-  width: 500px;
-  height: 500px;
-  background: $sidebarBgColor;
-  color: white;
+.effects {
+  @include base.ease-in-out(base.$menu-hide-time);
+  button {
+    @include base.ease-in-out(base.$button-hover-time);
+    &:hover {
+      color: lighten($color: base.$button-white, $amount: base.$lighten-amount);
+    }
+  }
+}
+
+.toggleVisibilityButtonStyles {
+  color: base.$button-white;
+  &:hover {
+    background-color: lighten($color: base.$secondary-color, $amount: 10%);
+  }
 }

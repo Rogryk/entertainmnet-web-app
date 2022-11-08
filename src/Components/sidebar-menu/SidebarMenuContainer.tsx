@@ -28,32 +28,32 @@ const SidebarMenuContainer = (props: SidebarMenuContainerProps) => {
 
   return (
     <>
-      <div
-        className={`${styles.sidebarMenuContainer} ${
-          props.isSidebarMenuHidden && styles.hidden
-        }`}
+      <nav
+        className={`sidebar position dimensions ${styles.effects} ${
+          styles.sidebarStyles
+        } ${props.isSidebarMenuHidden && "hidden"}`}
       >
         <button
           type="submit"
-          className={styles.homeBtn}
+          className={styles.homeButton}
           onClick={() => dispatch(setCategory("home"))}
         >
           <Link to="/home">
             <FontAwesomeIcon icon={faHouse} size="lg" />
           </Link>
         </button>
-        <div className={styles.submenuContainer}>
+        <div className={`buttonsContainer`}>
           <button
             type="submit"
             onClick={() => dispatch(setCategory("tvseries"))}
           >
             <Link to="/tvseries">
-              <IconDeviceTvOld stroke={2} className={styles.iconColor} />
+              <IconDeviceTvOld stroke={2} />
             </Link>
           </button>
           <button type="submit" onClick={() => dispatch(setCategory("movies"))}>
             <Link to="/movies">
-              <IconMovie stroke={2} className={styles.iconColor} />
+              <IconMovie stroke={2} />
             </Link>
           </button>
 
@@ -63,27 +63,23 @@ const SidebarMenuContainer = (props: SidebarMenuContainerProps) => {
               onClick={() => dispatch(setCategory("bookmarks"))}
             >
               <Link to="/bookmarks">
-                <IconBookmark stroke={2} className={styles.iconColor} />
+                <IconBookmark stroke={2} />
               </Link>
             </button>
           )}
         </div>
 
-        <button
-          type="submit"
-          className={`${styles.userBtn} `}
-          onClick={avatarClickHandler}
-        >
-          <IconUserCircle stroke={2} className={styles.iconColor} />
+        <button type="submit" onClick={avatarClickHandler}>
+          <IconUserCircle stroke={2} />
         </button>
         <button
           type="submit"
-          className={`${styles.visibilityBtn} `}
+          className={`toggleVisibilityButton ${styles.toggleVisibilityButtonStyles} `}
           onClick={() => props.setIsSidebarMenuHidden((prev) => !prev)}
         >
           {`${props.isSidebarMenuHidden ? ">" : "<"}`}
         </button>
-      </div>
+      </nav>
     </>
   );
 };
