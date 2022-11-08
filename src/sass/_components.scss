@@ -1,0 +1,15 @@
+@use "base";
+
+.playButton {
+  &.dimensions {
+    @include base.circle-setup(base.$play-button-diameter);
+    overflow: hidden;
+  }
+  &.styles {
+    background: base.$play-button-background;
+  }
+  .playIcon {
+    width: 100%;
+    height: 100%;
+  }
+}

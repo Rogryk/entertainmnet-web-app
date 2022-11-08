@@ -1,4 +1,3 @@
-import styles from "./PlayBtn.module.scss";
 import { IconPlayerPlay } from "@tabler/icons";
 
 interface PlayBtnProps {
@@ -7,8 +6,8 @@ interface PlayBtnProps {
 
 const PlayBtn = (props: PlayBtnProps) => {
   return (
-    <button className={`${styles.playBtn} ${props.classNames}`}>
-      <IconPlayerPlay className={styles.playIcon} fill={"white"} />
+    <button className={`playButton dimensions styles ${props.classNames}`}>
+      <IconPlayerPlay className={"playIcon"} fill={"white"} />
     </button>
   );
 };
