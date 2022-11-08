@@ -1,4 +1,5 @@
 # About project
+#in progress: refactoring scss code to be more readable and fitted to sass file structuring standards
 
 Imitation of VOD App inspired by frontendmentor.io challenge, link below. 
 
