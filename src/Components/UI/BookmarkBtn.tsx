@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./BookmarkBtn.module.scss";
 import { IconBookmark } from "@tabler/icons";
 
 interface BookmarkBtnProps {
@@ -11,14 +10,12 @@ interface BookmarkBtnProps {
 const BookmarkBtn = (props: BookmarkBtnProps) => {
   return (
     <button
-      className={`${styles.bookmark} ${props.classNames}`}
+      className={`bookmark position dimensions effects styles ${props.classNames}`}
       onClick={props.bookmarkHandler}
     >
       <IconBookmark
         stroke={2}
-        className={`${styles.bookmarkIcon} ${
-          props.isBookmarked && styles.bookmark_green
-        }`}
+        className={`bookmarkIcon  ${props.isBookmarked && "bookmarkChecked"}`}
       />
     </button>
   );

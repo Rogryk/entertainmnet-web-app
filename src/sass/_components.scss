@@ -29,3 +29,44 @@
     height: 100%;
   }
 }
+
+$enlargeOnHover: 10px;
+
+.bookmark {
+  @include base.flexCenter;
+
+  &.position {
+    z-index: 19;
+    &:hover {
+      $posTranslate: (
+          base.$bookmark-button-diameter + base.$bookmark-button-hover-enlarge -
+            base.$bookmark-button-diameter
+        ) / 2;
+      transform: translate($posTranslate, -$posTranslate);
+    }
+  }
+  &.dimensions {
+    @include base.circle-setup(base.$bookmark-button-diameter);
+    &:hover {
+      @include base.circle-setup(
+        base.$bookmark-button-diameter + base.$bookmark-button-hover-enlarge
+      );
+    }
+  }
+  &.effects {
+    transition: ease-in-out, 0.35s;
+  }
+  &.styles {
+    background: base.$play-button-background;
+    &:hover {
+      background: transparentize($color: rgb(0, 0, 0), $amount: 0.6);
+    }
+  }
+  .bookmarkIcon {
+    height: 90%;
+    width: 90%;
+  }
+  .bookmarkChecked {
+    stroke: base.$bookmark-button-checked-color;
+  }
+}
