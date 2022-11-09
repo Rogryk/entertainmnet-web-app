@@ -4,14 +4,22 @@ $sidebar-width: 70px;
 $sidebar-height: 85vh;
 $sidebar-height-min: 270px;
 $sidebar-hide-button-width: 12px;
+
 $searchbar-width-pc: 400px;
 $searchbar-width-phone: 75%;
 $searchbar-height: 40px;
 
+$logout-window-width: 15rem;
+$logout-window-height: 10rem;
+$logout-button-width: 8.5rem;
+$logout-button-height: 4.5rem;
+
 $auth-button-width: 8rem;
 $auth-button-height: 2.6rem;
 $auth-button-border-radius: 0.45rem;
+
 $play-button-diameter: 80px;
+
 $bookmark-button-diameter: 24px;
 
 // colors
@@ -20,7 +28,6 @@ $secondary-color: rgb(22, 29, 47);
 $text-color: rgb(255, 255, 255);
 $button-red: rgb(196, 58, 68);
 $button-white: rgb(123, 129, 139);
-
 $play-button-background: rgba(0, 0, 0, 0.5);
 $bookmark-button-hover-enlarge: 4px;
 $bookmark-button-checked-color: rgba(2, 255, 36, 0.8);

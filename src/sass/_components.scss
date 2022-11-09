@@ -110,3 +110,41 @@ $enlargeOnHover: 10px;
     }
   }
 }
+
+// Logout Window Component
+.logout {
+  @include base.flexCenter;
+
+  &.position {
+    @include base.absCenterXY();
+    margin: auto;
+  }
+  &.dimensions {
+    width: base.$logout-window-width;
+    height: base.$logout-window-height;
+    border-radius: 0.5rem;
+  }
+  &.styles {
+    background: base.$secondary-color;
+    color: white;
+  }
+
+  .button {
+    &.dimensions {
+      border-radius: 0.5rem;
+      width: base.$logout-button-width;
+      height: base.$logout-button-height;
+    }
+    &.styles {
+      font-size: 2rem;
+      background: base.$button-red;
+      color: base.$text-color;
+      &:hover {
+        background-color: darken(
+          $color: base.$button-red,
+          $amount: base.$darken-amount
+        ) !important;
+      }
+    }
+  }
+}

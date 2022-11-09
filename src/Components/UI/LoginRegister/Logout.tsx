@@ -13,8 +13,14 @@ const Logout = ({ logoutHandler, onBlur }: LogoutProps) => {
     onBlur();
   };
   return (
-    <div className={styles.logoutContainer} onBlur={blurHandler} tabIndex={0}>
-      <Button onClick={logoutHandler}>Logout</Button>
+    <div
+      className={`logout position dimensions styles`}
+      onBlur={blurHandler}
+      tabIndex={0}
+    >
+      <Button classList="button dimensions styles" onClick={logoutHandler}>
+        Logout
+      </Button>
     </div>
   );
 };
