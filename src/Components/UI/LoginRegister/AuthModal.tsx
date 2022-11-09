@@ -3,7 +3,6 @@ import Logout from "./Logout";
 import AuthContainer from "./AuthContainer";
 import { useAppSelector } from "../../../hooks/reduxHooks";
 import type { UserCredentialsProps } from "../../../store/authSlice";
-import styles from "./AuthModal.module.scss";
 
 const Backdrop = () => {
   return <div className={"modalBackdrop position dimensions styles"}></div>;
@@ -48,8 +47,7 @@ const AuthModal = (props: AuthWindowProps) => {
             onLogin={onLogin}
             onLogout={onLogout}
             onRegister={onRegister}
-            // onBlur={onBlur}
-            onBlur={() => {}}
+            onBlur={onBlur}
           />,
           authOverlayRef
         )}
