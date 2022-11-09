@@ -67,11 +67,14 @@ input {
 
   &.position {
     margin-top: 5vh;
-    &.collapsedView {
-      margin-left: 135px;
-    }
-    &.fullView {
-      margin-left: 3vw;
+    margin-left: 1vw;
+    @media screen and (min-width: base.$phone-breakpoint) {
+      &.collapsedView {
+        margin-left: 135px;
+      }
+      &.fullView {
+        margin-left: 3vw;
+      }
     }
   }
   &.dimensions {
