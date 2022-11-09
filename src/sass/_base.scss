@@ -148,8 +148,8 @@ $uiWhite: rgba(255, 255, 255, 1);
 // end of old mixins file
 
 @mixin hoverEffect($colorEffect) {
+  @include ease-in-out($button-hover-time);
   &:hover {
-    @include ease-in-out($button-hover-time);
     @if $colorEffect == "lighten" {
       color: lighten($color: $button-white, $amount: $lighten-amount);
     }

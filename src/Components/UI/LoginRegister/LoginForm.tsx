@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import styles from "./LoginForm.module.scss";
 import { getAuth } from "firebase/auth";
-import { UserCredentialsProps } from "../../../store/authSlice";
+import type { UserCredentialsProps } from "../../../store/authSlice";
 import Button from "../AuthButton";
 
 interface LoginFormProps {
@@ -21,10 +20,11 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={"form dimensions login"} onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label>Email</label>
         <input
+          className={`input position dimensions styles`}
           autoFocus={true}
           type="email"
           {...register("email", {
@@ -36,19 +36,22 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
           })}
         />
         {errors.email && isSubmitted && (
-          <p className={styles.error}>{errors.email.message}</p>
+          <p className={"error position styles"}>{errors.email.message}</p>
         )}
       </div>
       <div>
         <label>Password</label>
         <input
+          className={`input position dimensions styles`}
           type="password"
           {...register("password", {
             required: "Password is required",
           })}
         />
       </div>
-      <Button onClick={() => {}}>Login</Button>
+      <Button classList="button position dimensions" onClick={() => {}}>
+        Login
+      </Button>
     </form>
   );
 };

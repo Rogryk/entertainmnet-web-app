@@ -33,7 +33,7 @@ const AuthWindow = (props: AuthWindowProps) => {
   );
 };
 
-const AuthModal = (props: AuthWindowProps) => {
+const Modal = (props: AuthWindowProps) => {
   const { onLogin, onLogout, onRegister, onBlur } = { ...props };
   const authOverlayRef = document.getElementById("auth-overlay");
   const authBackdropRef = document.getElementById("auth-backdrop");
@@ -47,7 +47,8 @@ const AuthModal = (props: AuthWindowProps) => {
             onLogin={onLogin}
             onLogout={onLogout}
             onRegister={onRegister}
-            onBlur={onBlur}
+            // onBlur={onBlur}
+            onBlur={() => {}}
           />,
           authOverlayRef
         )}
@@ -55,4 +56,4 @@ const AuthModal = (props: AuthWindowProps) => {
   );
 };
 
-export default AuthModal;
+export default Modal;

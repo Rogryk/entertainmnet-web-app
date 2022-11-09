@@ -8,7 +8,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
   return (
     <button
-      className={"authButton"}
+      className={`authButton dimensions effects styles ${props.classList}`}
       type="submit"
       onClick={() => props.onClick()}
       autoFocus={true}

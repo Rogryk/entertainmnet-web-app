@@ -1,8 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import Button from "../AuthButton";
 import { getAuth } from "firebase/auth";
 import type { UserCredentialsProps } from "../../../store/authSlice";
-import styles from "./RegisterForm.module.scss";
+import Button from "../AuthButton";
 
 interface IFormInput {
   email: string;
@@ -30,10 +29,14 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={"form dimensions register"}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div>
         <label>Email</label>
         <input
+          className={`input position dimensions styles`}
           autoFocus={true}
           type="email"
           {...register("email", {
@@ -45,12 +48,13 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
           })}
         />
         {errors.email && isSubmitted && (
-          <p className={styles.error}>{errors.email.message}</p>
+          <p className={"error position styles"}>{errors.email.message}</p>
         )}
       </div>
       <div>
         <label>Password</label>
         <input
+          className={`input position dimensions styles`}
           type="password"
           {...register("password", {
             required: "Password is required",
@@ -61,12 +65,13 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
           })}
         />
         {errors.password && (
-          <p className={styles.error}>{errors.password.message}</p>
+          <p className={"error position styles"}>{errors.password.message}</p>
         )}
       </div>
       <div>
         <label>Repeat password</label>
         <input
+          className={`input position dimensions styles`}
           type="password"
           {...register("cpassword", {
             required: true,
@@ -81,10 +86,12 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
           })}
         />
         {errors.cpassword && (
-          <p className={styles.error}>{errors.cpassword.message}</p>
+          <p className={"error position styles"}>{errors.cpassword.message}</p>
         )}
       </div>
-      <Button onClick={() => {}}>Register</Button>
+      <Button classList="button position dimensions" onClick={() => {}}>
+        Register
+      </Button>
     </form>
   );
 };

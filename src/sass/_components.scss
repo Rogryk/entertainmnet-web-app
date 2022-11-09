@@ -4,6 +4,9 @@
   &.dimensions {
     border-radius: base.$auth-button-border-radius;
   }
+  &.effects {
+    @include base.ease-in-out(base.$button-hover-time);
+  }
   &.styles {
     background-color: base.$button-red !important;
     font-size: 1.5rem;
