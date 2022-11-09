@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
-import MediaContainer from "./Components/Media/MediaContainer";
 import BurgerMenu from "./Components/sidebar-menu/BurgerMenu";
 import {
   toggleAuthWindow,
@@ -21,6 +20,7 @@ import useHttp from "./hooks/useHttp";
 import { loadUserData } from "./store/mediaSlice";
 import "./sass/main.scss";
 import SearchBar from "./Components/search-bar/Searchbar";
+import ContentContainer from "./Components/Media/ContentContainer";
 
 const SUBPAGES_LIST = ["home", "categories", "movies", "tvseries", "bookmarks"];
 const FIREBASE_USERS_URL =
@@ -110,8 +110,11 @@ function App() {
       {isPhoneWidth && <BurgerMenu />}
       <SearchBar isSidebarMenuHidden={isSidebarHidden} />
       {!authSelector.isAuthorizing && (
-        <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
+        <ContentContainer isSidebarMenuHidden={isSidebarHidden} />
       )}
+      {/* {!authSelector.isAuthorizing && (
+        <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
+      )} */}
       {authSelector.isAuthWindowOpen && (
         <Modal
           onLogin={onLogin}

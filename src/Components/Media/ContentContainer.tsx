@@ -34,11 +34,15 @@ interface IMediaElementThumbnail {
   trending?: IMediaElementThumbnailContent;
 }
 
+interface ContentContainerProps {
+  isSidebarMenuHidden: boolean;
+}
+
 const FIREBASE_URL =
   "https://web-entertainment-app-default-rtdb.firebaseio.com/public/media.json";
 let isInitial = true;
 
-const ContentContainer = () => {
+const ContentContainer = (props: ContentContainerProps) => {
   const [contentToDisplay, setContentToDisplay] = useState<
     IMediaContentElement[] | null
   >(null);
@@ -221,15 +225,23 @@ const ContentContainer = () => {
   }, [mediaSel, navSel.currentCategory, userDataSel]);
 
   return (
-    <>
+    <div
+      className={`${styles.mediaContainer} ${
+        props.isSidebarMenuHidden && styles.thin
+      }`}
+    >
       {!isLoading && !error && contentToDisplay && (
         <Content mediaContent={contentToDisplay} />
       )}
-      <div className={styles.stateDisplay}>
-        {isLoading && "Loading data..."}
-        {error && `Loading error. Try refresh. ${error}`}
-      </div>
-    </>
+
+      {isLoading ||
+        (error && (
+          <div className={styles.stateDisplay}>
+            {isLoading && "Loading data..."}
+            {error && `Loading error. Try refresh. ${error}`}
+          </div>
+        ))}
+    </div>
   );
 };
 
