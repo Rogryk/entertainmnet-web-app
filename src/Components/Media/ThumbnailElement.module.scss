@@ -47,6 +47,7 @@ $elementWidthLong: 320px;
 //### ALL THEMES ###
 .element {
   position: relative;
+  margin: auto;
   .imgWrapper {
     border-radius: $imageBorderRadius;
     overflow: hidden;

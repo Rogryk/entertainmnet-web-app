@@ -6,7 +6,6 @@ import shuffle from "../../utility/arrayShuffle";
 import createBasicInfoArray from "../../utility/createBasicInfoArray";
 import { loadMedia } from "../../store/mediaSlice";
 import { auth } from "../../utility/initFirebase";
-import styles from "./ContentContainer.module.scss";
 
 export interface IMediaBasicInfo {
   title: string;
@@ -226,8 +225,8 @@ const ContentContainer = (props: ContentContainerProps) => {
 
   return (
     <div
-      className={`${styles.mediaContainer} ${
-        props.isSidebarMenuHidden && styles.thin
+      className={`contentContainer position dimensions effects styles ${
+        props.isSidebarMenuHidden ? "fullView" : "collapsedView"
       }`}
     >
       {!isLoading && !error && contentToDisplay && (
@@ -236,7 +235,7 @@ const ContentContainer = (props: ContentContainerProps) => {
 
       {isLoading ||
         (error && (
-          <div className={styles.stateDisplay}>
+          <div className={"stateDisplay"}>
             {isLoading && "Loading data..."}
             {error && `Loading error. Try refresh. ${error}`}
           </div>

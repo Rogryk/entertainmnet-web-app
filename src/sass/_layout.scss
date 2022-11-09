@@ -158,3 +158,43 @@ input {
     }
   }
 }
+
+// ContentContainer Component
+.contentContainer {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media screen and (max-width: base.$phone-breakpoint) {
+    padding: 0;
+  }
+
+  &.position {
+    float: right;
+  }
+
+  &.dimensions {
+    width: 97%;
+    height: fit-content;
+
+    @media screen and (min-width: base.$phone-breakpoint) {
+      &.fullView {
+        width: 100%;
+      }
+      &.collapsedView {
+        width: calc(100vw - 150px);
+      }
+    }
+  }
+
+  &.effects {
+    transition: ease-in-out 1s;
+  }
+
+  .stateDisplay {
+    color: white;
+    padding-top: 2rem;
+    padding-left: 1rem;
+  }
+}
