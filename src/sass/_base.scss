@@ -159,6 +159,11 @@ $uiWhite: rgba(255, 255, 255, 1);
   }
 }
 
+@mixin topLeft {
+  top: 0;
+  left: 0;
+}
+
 // start of burger menu defualts
 /* Position and sizing of burger button */
 .bm-burger-button {

@@ -26,13 +26,13 @@ input {
     position: fixed;
     margin: base.$margin-top 0 0 1.85rem;
     padding: 20px;
+    z-index: 99;
   }
   &.dimensions {
     border-radius: 14px;
     width: base.$sidebar-width;
     height: base.$sidebar-height;
     min-height: base.$sidebar-height-min;
-    z-index: 99;
   }
   &.hidden {
     margin-left: calc(base.$sidebar-hide-button-width - base.$sidebar-width);
@@ -82,13 +82,13 @@ input {
 
   &.position {
     margin: auto;
+    z-index: 99;
   }
   &.dimensions {
     border-radius: 0.5rem;
     width: 85%;
     max-width: 400px;
     height: 25rem;
-    z-index: 99;
     @media screen and (max-width: base.$phone-breakpoint) {
       width: 100%;
       height: 100%;

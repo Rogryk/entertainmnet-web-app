@@ -6,21 +6,21 @@ import type { UserCredentialsProps } from "../../../store/authSlice";
 import styles from "./AuthModal.module.scss";
 
 const Backdrop = () => {
-  return <div className={styles.backdrop}></div>;
+  return <div className={"modalBackdrop position dimensions styles"}></div>;
 };
 
-interface AuthOverlayProps {
+interface AuthWindowProps {
   onLogin: (userCredentials: UserCredentialsProps) => void;
   onLogout: () => void;
   onRegister: (userCredentials: UserCredentialsProps) => void;
   onBlur: () => void;
 }
 
-const AuthOverlay = (props: AuthOverlayProps) => {
+const AuthWindow = (props: AuthWindowProps) => {
   const { onLogin, onLogout, onRegister, onBlur } = { ...props };
   const authSel = useAppSelector((state) => state.auth);
   return (
-    <div className={styles.auth}>
+    <div className={"modalWindow position dimensions"}>
       {authSel.isAuthorized ? (
         <Logout logoutHandler={onLogout} onBlur={onBlur} />
       ) : (
@@ -34,7 +34,7 @@ const AuthOverlay = (props: AuthOverlayProps) => {
   );
 };
 
-const AuthModal = (props: AuthOverlayProps) => {
+const AuthModal = (props: AuthWindowProps) => {
   const { onLogin, onLogout, onRegister, onBlur } = { ...props };
   const authOverlayRef = document.getElementById("auth-overlay");
   const authBackdropRef = document.getElementById("auth-backdrop");
@@ -44,11 +44,12 @@ const AuthModal = (props: AuthOverlayProps) => {
 
       {authOverlayRef &&
         ReactDOM.createPortal(
-          <AuthOverlay
+          <AuthWindow
             onLogin={onLogin}
             onLogout={onLogout}
             onRegister={onRegister}
-            onBlur={onBlur}
+            // onBlur={onBlur}
+            onBlur={() => {}}
           />,
           authOverlayRef
         )}
