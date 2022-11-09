@@ -20,6 +20,7 @@ import Modal from "./Components/UI/LoginRegister/Modal";
 import useHttp from "./hooks/useHttp";
 import { loadUserData } from "./store/mediaSlice";
 import "./sass/main.scss";
+import SearchBar from "./Components/search-bar/Searchbar";
 
 const SUBPAGES_LIST = ["home", "categories", "movies", "tvseries", "bookmarks"];
 const FIREBASE_USERS_URL =
@@ -112,6 +113,7 @@ function App() {
           outerContainerId={"outer-container"}
         />
       )}
+      <SearchBar isSidebarMenuHidden={isSidebarHidden} />
       <div id="page-wrap">
         {!authSelector.isAuthorizing && (
           <MediaContainer isSidebarMenuHidden={isSidebarHidden} />

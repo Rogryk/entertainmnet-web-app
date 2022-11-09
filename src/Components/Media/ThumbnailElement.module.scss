@@ -1,6 +1,4 @@
-@import "../../layout/mixins";
-@import "../../layout/layout";
-
+@use "../../sass/base";
 //### THEME ALL ###
 // Size
 $imageBorderRadius: 8px;
@@ -26,7 +24,7 @@ $picWidthShort: 170px;
   .description {
     padding-top: 0.3rem;
   }
-  @media screen and (max-width: $breakpointPhone) {
+  @media screen and (max-width: base.$phone-breakpoint) {
     max-width: 100%;
   }
 }
@@ -36,13 +34,13 @@ $elementHeightLong: 150px;
 $elementWidthLong: 320px;
 
 .themeLong {
-  @include size-setup($elementWidthLong, $elementHeightLong);
+  @include base.size-setup($elementWidthLong, $elementHeightLong);
   .imgWrapper {
-    @include size-setup(320px, 150px);
+    @include base.size-setup(320px, 150px);
     overflow: hidden;
   }
   .description {
-    @include abs-position(none, none, 0.4rem, 1rem);
+    @include base.abs-position(none, none, 0.4rem, 1rem);
   }
 }
 
@@ -149,5 +147,5 @@ $elementWidthLong: 320px;
 }
 
 .bookmarkPos {
-  @include abs-position(6%, 4%, none, none);
+  @include base.abs-position(6%, 4%, none, none);
 }

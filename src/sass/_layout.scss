@@ -63,9 +63,16 @@ input {
   justify-content: start;
   align-items: center;
   overflow: hidden;
+  @include base.ease-in-out(base.$menu-hide-time);
 
   &.position {
-    padding-left: 5px;
+    margin-top: 5vh;
+    &.collapsedView {
+      margin-left: 135px;
+    }
+    &.fullView {
+      margin-left: 3vw;
+    }
   }
   &.dimensions {
     width: base.$searchbar-width-pc;

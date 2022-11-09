@@ -1,6 +1,6 @@
-@import "../../layout/layout";
+@use "../../sass/base";
 
-$marginTop: 5vh;
+$marginTop: 0vh;
 $mediaContainerWidthFull: calc(100vw - 150px);
 $mediaContainerWidthPhone: 99%;
 $mediaContainerWidthThin: 99%;
@@ -16,14 +16,14 @@ $mediaContainerWidthThinBreakpoint1: 97%;
   flex-direction: column;
   justify-content: space-between;
   transition: ease-in-out 1s;
-  @media screen and (max-width: $breakpointPhone) {
+  @media screen and (max-width: base.$phone-breakpoint) {
     width: $mediaContainerWidthPhone;
   }
 }
 
 .thin {
   width: $mediaContainerWidthThin;
-  @media (max-width: $breakpointThin1) {
+  @media (max-width: base.$tablet-breakpoint) {
     width: $mediaContainerWidthThinBreakpoint1;
   }
 }

@@ -3,14 +3,19 @@ import { setSearchValue } from "../../store/navigationSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import styles from "./Searchbar.module.scss";
 
-const SearchBar = () => {
+interface SearchbarProps {
+  isSidebarMenuHidden: boolean;
+}
+
+const SearchBar = (props: SearchbarProps) => {
   const appDispatch = useAppDispatch();
   const navSel = useAppSelector((state) => state.nav);
 
+  const position = props.isSidebarMenuHidden ? "fullView" : "collapsedView";
   return (
     <section
       role="search"
-      className={`searchbar position dimensions ${styles.styles}`}
+      className={`searchbar position dimensions ${position} ${styles.styles}`}
     >
       <IconSearch className={styles.icon} />
       <input

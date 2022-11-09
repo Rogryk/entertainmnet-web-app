@@ -13,7 +13,6 @@ const MediaContainer = ({ isSidebarMenuHidden }: MediaContainerProps) => {
         isSidebarMenuHidden && styles.thin
       }`}
     >
-      <Searchbar />
       <ContentContainer />
     </div>
   );

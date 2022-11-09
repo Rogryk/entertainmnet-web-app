@@ -1,5 +1,4 @@
-@import "../../layout/layout";
-
+@use "../../sass/base";
 @mixin overflow-setup($x, $y) {
   overflow-x: $x;
   overflow-y: $y;
@@ -32,7 +31,7 @@ $breakpoint1: 768px;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-gap: 0.7rem;
   justify-content: space-between;
-  @media screen and (max-width: $breakpointPhone) {
+  @media screen and (max-width: base.$phone-breakpoint) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +46,7 @@ $breakpoint1: 768px;
   h2 {
     width: 100%;
     font-size: 1.5rem;
-    @media screen and (max-width: $breakpointPhone) {
+    @media screen and (max-width: base.$phone-breakpoint) {
       text-align: center;
     }
   }
