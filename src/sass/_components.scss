@@ -126,7 +126,6 @@ $enlargeOnHover: 10px;
   }
   &.styles {
     background: base.$secondary-color;
-    color: white;
   }
 
   .button {
@@ -138,7 +137,6 @@ $enlargeOnHover: 10px;
     &.styles {
       font-size: 2rem;
       background: base.$button-red;
-      color: base.$text-color;
       &:hover {
         background-color: darken(
           $color: base.$button-red,

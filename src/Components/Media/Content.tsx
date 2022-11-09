@@ -1,6 +1,5 @@
 import React from "react";
 import SubcontentContainer from "./SubcontentContainer";
-import styles from "./Content.module.scss";
 
 export interface IMediaContentElement {
   title: string;
@@ -14,7 +13,7 @@ interface IContentProps {
 
 const Content: React.FC<IContentProps> = (props) => {
   return (
-    <div className={styles.contentContainer}>
+    <div className={"content"}>
       {props.mediaContent.map((el: IMediaContentElement) => {
         return (
           <SubcontentContainer

@@ -9,6 +9,8 @@ $searchbar-width-pc: 400px;
 $searchbar-width-phone: 75%;
 $searchbar-height: 40px;
 
+$thumbnail-description-height: 40px;
+
 $logout-window-width: 15rem;
 $logout-window-height: 10rem;
 $logout-button-width: 8.5rem;
@@ -78,6 +80,7 @@ html {
   margin: 0;
   padding: 0;
   overflow-y: scroll;
+  color: $text-color;
 }
 
 *,
