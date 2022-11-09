@@ -9,6 +9,11 @@ $searchbar-width-pc: 400px;
 $searchbar-width-phone: 75%;
 $searchbar-height: 40px;
 
+$section-title-font-size: 1.5rem;
+$section-scrollbar-height: 10px;
+$section-short-grid-min-column-width: 160px;
+$section-short-column-gap: 0.7rem;
+
 $thumbnail-description-height: 40px;
 
 $logout-window-width: 15rem;
@@ -33,6 +38,8 @@ $button-white: rgb(123, 129, 139);
 $play-button-background: rgba(0, 0, 0, 0.5);
 $bookmark-button-hover-enlarge: 4px;
 $bookmark-button-checked-color: rgba(2, 255, 36, 0.8);
+$scrollbar-color: rgba(0, 0, 0, 0.4);
+$scrollbar-thumb-color: rgba(0, 0, 0, 0.8);
 
 // positioning
 $margin-top: 5vh;

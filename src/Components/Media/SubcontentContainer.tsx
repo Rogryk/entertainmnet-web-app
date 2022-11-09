@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import Element from "./ThumbnailElement";
-import { IMediaBasicInfo } from "./ContentContainer";
-import styles from "./SubcontentContainer.module.scss";
+import type { IMediaBasicInfo } from "./ContentContainer";
 
 interface ISubcontentContainer {
   content: IMediaBasicInfo[];
@@ -26,9 +25,9 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={"subcontentContainer dimensions styles"}>
       <h2>{props.title}</h2>
-      <div className={`${styles.subcontentContainer} ${styles[theme]}`}>
+      <div className={`subcontent styles ${theme}`}>
         {props.content &&
           props.content.map((el) => {
             return (
