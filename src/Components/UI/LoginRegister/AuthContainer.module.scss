@@ -1,39 +1,21 @@
-@import "../../../layout/_mixins";
-@import "../../../layout/layout";
+@use "../../../sass/base";
 
-.authContainer {
-  width: 85%;
-  max-width: 400px;
-  height: 25rem;
-  background: $sidebarBgColor;
-  color: white;
-  justify-content: center;
-  margin: auto;
-  border-radius: 0.5rem;
-  z-index: 99;
-  @media screen and (max-width: $breakpointPhone) {
-    width: 100%;
-    height: 100%;
-  }
+.authStyles {
+  background: base.$secondary-color;
+  color: base.$text-color;
 }
 
-.tab {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 2rem;
+.tabStyles {
   width: 50%;
-  &:hover {
-    background: lighten($color: $sidebarBgColor, $amount: 10%);
-  }
-  &:focus {
-    background: lighten($color: $sidebarBgColor, $amount: 10%);
-    color: rgba(255, 255, 255, 0.8);
-  }
+  font-size: 2rem;
+
+  &:hover,
+  &:focus,
   &:checked {
-    background: lighten($color: $sidebarBgColor, $amount: 10%);
-    color: rgba(255, 255, 255, 0.8);
+    background: lighten($color: base.$secondary-color, $amount: 10%);
   }
 }
 
-.tabLabel {
-  color: rgba(255, 255, 255, 0.8);
+.tabLabelStyles {
+  color: transparentize($color: base.$text-color, $amount: 0.2);
 }

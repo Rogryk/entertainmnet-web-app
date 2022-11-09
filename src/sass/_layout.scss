@@ -75,3 +75,23 @@ input {
     }
   }
 }
+
+// Auth Component
+.auth {
+  justify-content: center;
+
+  &.position {
+    margin: auto;
+  }
+  &.dimensions {
+    border-radius: 0.5rem;
+    width: 85%;
+    max-width: 400px;
+    height: 25rem;
+    z-index: 99;
+    @media screen and (max-width: base.$phone-breakpoint) {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

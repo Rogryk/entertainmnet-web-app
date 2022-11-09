@@ -18,12 +18,15 @@ const AuthContainer = ({ onLogin, onRegister, onBlur }: AuthContainerProps) => {
   };
 
   return (
-    <div className={styles.authContainer} onBlur={blurHandler} tabIndex={0}>
+    <div
+      className={`auth position dimensions ${styles.authStyles}`}
+      onBlur={blurHandler}
+      tabIndex={0}
+    >
       <Tabs
         radius="xs"
         defaultValue="login"
-        className={styles.tabContainer}
-        classNames={{ tab: styles.tab, tabLabel: styles.tabLabel }}
+        classNames={{ tab: styles.tabStyles, tabLabel: styles.tabLabelStyles }}
       >
         <Tabs.List position="center">
           <Tabs.Tab value="login">Login</Tabs.Tab>
