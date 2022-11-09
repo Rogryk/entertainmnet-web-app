@@ -15,8 +15,8 @@ import {
 import styles from "./BurgerMenu.module.scss";
 
 interface BurgerButtonProps {
-  pageWrapId: String;
-  outerContainerId: String;
+  pageWrapId?: String;
+  outerContainerId?: String;
 }
 
 const BurgerMenu = (props: BurgerButtonProps) => {

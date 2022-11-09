@@ -100,25 +100,18 @@ function App() {
   };
 
   return (
-    <div className={"app"} id="outer-container">
+    <div className={"app"}>
       {!isPhoneWidth && (
         <SidebarMenuContainer
           isSidebarMenuHidden={isSidebarHidden}
           setIsSidebarMenuHidden={setIsSidebarHidden}
         />
       )}
-      {isPhoneWidth && (
-        <BurgerMenu
-          pageWrapId={"page-wrap"}
-          outerContainerId={"outer-container"}
-        />
-      )}
+      {isPhoneWidth && <BurgerMenu />}
       <SearchBar isSidebarMenuHidden={isSidebarHidden} />
-      <div id="page-wrap">
-        {!authSelector.isAuthorizing && (
-          <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
-        )}
-      </div>
+      {!authSelector.isAuthorizing && (
+        <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
+      )}
       {authSelector.isAuthWindowOpen && (
         <Modal
           onLogin={onLogin}
