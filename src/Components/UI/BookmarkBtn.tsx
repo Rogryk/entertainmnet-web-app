@@ -14,8 +14,9 @@ const BookmarkBtn = (props: BookmarkBtnProps) => {
       onClick={props.bookmarkHandler}
     >
       <IconBookmark
-        stroke={2}
+        stroke={1}
         className={`bookmarkIcon  ${props.isBookmarked && "bookmarkChecked"}`}
+        fill={props.isBookmarked ? "white" : "rgba(0, 0, 0, 0.2)"}
       />
     </button>
   );

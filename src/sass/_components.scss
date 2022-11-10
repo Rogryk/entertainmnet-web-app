@@ -51,9 +51,12 @@
     transition: ease-in-out, 0.35s;
   }
   &.styles {
-    background: base.$play-button-background;
+    background: base.$bookmark-button-background;
     &:hover {
-      background: transparentize($color: rgb(0, 0, 0), $amount: 0.6);
+      background: transparentize(
+        $color: base.$bookmark-button-background,
+        $amount: 0.6
+      );
     }
   }
   @include base.circleEnlargeOnHover(
