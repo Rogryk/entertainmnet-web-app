@@ -40,16 +40,24 @@ const Element: React.FC<IElement> = (props) => {
 
   const icon = props.category === "movie" ? <IconMovie /> : <IconDeviceTvOld />;
   return (
-    <div className={`${styles.element} ${styles[theme]}`}>
-      <div className={styles.imgWrapper}>
-        <div className={`${styles.hoverLayer}  ${isHovered && styles.show}`}>
-          <PlayBtn classNames={styles.playBtnPos} />
+    <div className={`element position ${theme}`}>
+      <div
+        className={`imageWrapper ${theme}`}
+        onMouseOver={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div
+          className={`hoverLayer position dimensions effects styles  ${
+            isHovered && "show"
+          }`}
+        >
+          <PlayBtn classNames={`playBtn`} />
         </div>
 
         <LazyLoadImage
           src={props.image}
           alt={`thumbnail of...`}
-          className={`${isHovered && styles.imgHoverEffect}`}
+          className={`thumbnailImage ${isHovered && "imageHoverEffect"}`}
           effect="opacity"
         ></LazyLoadImage>
 
@@ -57,29 +65,29 @@ const Element: React.FC<IElement> = (props) => {
           <BookmarkBtn
             isBookmarked={props.isBookmarked}
             bookmarkHandler={bookmarkClickHandler}
-            classNames={styles.bookmarkPos}
+            classNames={"bookmarkPos"}
           />
         )}
       </div>
 
       <div
-        className={styles.description}
+        className={`description position dimensions ${theme}`}
         onMouseOver={descHoverHandler}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <ul className={styles.info}>
-          <li>{props.year}</li>
-          <li>
-            <span className={styles.info_category}>
+        <ul className={"info  styles"}>
+          <li className={`info__element`}>{props.year}</li>
+          <li className={`info__element`}>
+            <span className={"element_category"}>
               {icon}
               {props.category}
             </span>
           </li>
-          <li>
+          <li className={`info__element`}>
             <span>{props.rating}</span>
           </li>
         </ul>
-        <h3>{props.title}</h3>
+        <h3 className={`mediaTitle`}>{props.title}</h3>
       </div>
     </div>
   );

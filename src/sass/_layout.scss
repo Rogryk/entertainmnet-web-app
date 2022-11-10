@@ -241,9 +241,173 @@ input {
     //trending
     &.themeLong {
       overflow-x: scroll;
+      overflow-y: hidden;
       display: flex;
       justify-content: space-between;
       gap: 20px;
+    }
+  }
+}
+
+// ThumbnailElement Component
+//### THEME ALL ###
+// Size
+$imageBorderRadius: 8px;
+$descHeight: 40px;
+$titleFontSize: 1rem;
+$titleFontWeight: 600;
+$infoFontSize: 0.65rem;
+// Color
+$infoFontWeight: 300;
+$infoFontColor: rgba(255, 255, 255, 0.75);
+
+//### THEME SHORT ###
+$elementHeightShort: 150px;
+$picHeightShort: calc($elementHeightShort - $descHeight);
+$picWidthShort: 170px;
+
+//### THEME LONG ###
+$elementHeightLong: 150px;
+$elementWidthLong: 320px;
+
+//### ALL THEMES ###
+.element {
+  position: relative;
+
+  // small, flexible thumbnails
+  &.themeShort {
+    flex: 1 1 190px;
+    flex-basis: 0;
+    max-width: 230px;
+    min-width: 150px;
+    @media screen and (max-width: base.$phone-breakpoint) {
+      max-width: 100%;
+    }
+  }
+
+  // long thumbnails for trending section
+  &.themeLong {
+    width: $elementWidthLong;
+    height: $elementHeightLong;
+    min-width: $elementWidthLong;
+    min-height: $elementHeightLong;
+  }
+
+  .imageWrapper {
+    border-radius: $imageBorderRadius;
+    overflow: hidden;
+    position: relative;
+
+    &.themeLong {
+      height: 100%;
+    }
+    &.themeShort {
+      span {
+        display: flex !important; // to overwrite base component style
+      }
+    }
+
+    .thumbnailImage {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: ease-in-out, 0.35s;
+      &.imageHoverEffect {
+        transform: scale(1.05);
+      }
+    }
+
+    .hoverLayer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.position {
+        position: absolute;
+        @include base.topLeft;
+        z-index: 9;
+      }
+      &.dimensions {
+        width: 100%;
+        height: 100%;
+      }
+      &.effects {
+        transition: ease-in-out 0.5s;
+      }
+      &.styles {
+        opacity: 0;
+        background: rgba(0, 0, 0, 0.5);
+        &.show {
+          opacity: 1;
+        }
+      }
+      span {
+        display: block !important;
+      }
+      .playBtn {
+        background: base.$play-button-background;
+        &:hover {
+          background: transparentize($color: rgb(0, 0, 0), $amount: 0.9);
+        }
+      }
+    }
+    .bookmarkPos {
+      @include base.abs-position(6%, 4%, none, none);
+    }
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+
+    &.position {
+      z-index: 19;
+    }
+    &.dimensions {
+      height: 25%;
+      width: fit-content;
+    }
+    &.themeShort {
+      padding-top: 0.3rem;
+    }
+    &.themeLong {
+      @include base.abs-position(none, none, 0.4rem, 1rem);
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    .info {
+      display: inline-flex;
+
+      &.styles {
+        color: darken($color: base.$text-color, $amount: base.$darken-amount);
+        font-size: base.$thumbnail-description-font-size;
+        font-weight: base.$thumbnail-description-font-weight;
+      }
+      .info__element {
+        display: inline-flex;
+        &::before {
+          content: "•";
+          margin-right: 5px;
+          margin-left: 5px;
+        }
+        &:first-child::before {
+          content: "";
+          margin: 0px;
+        }
+      }
+      .element_category {
+        display: inline-flex;
+        align-items: center;
+        svg {
+          height: base.$thumbnail-description-font-size;
+          width: base.$thumbnail-description-font-size;
+        }
+      }
+    }
+    .mediaTitle {
+      font-size: $titleFontSize;
+      font-weight: $titleFontWeight;
     }
   }
 }
