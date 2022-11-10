@@ -1,9 +1,0 @@
-@import "./layout/mixins.scss";
-
-.app {
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
-  min-height: 100vh;
-  background: $mainBgColor;
-}
