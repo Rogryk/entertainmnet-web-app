@@ -24,7 +24,7 @@ input {
 
   &.position {
     position: fixed;
-    margin: base.$margin-top 0 0 1.85rem;
+    margin: base.$sidebar-margin-top 0 0 1.85rem;
     padding: 20px;
     z-index: 99;
   }
@@ -63,7 +63,7 @@ input {
   justify-content: start;
   align-items: center;
   overflow: hidden;
-  @include base.ease-in-out(base.$menu-hide-time);
+  transition: ease-in-out base.$menu-hide-time;
 
   &.position {
     margin-top: 5vh;
@@ -352,7 +352,7 @@ $elementWidthLong: 320px;
       }
     }
     .bookmarkPos {
-      @include base.abs-position(6%, 4%, none, none);
+      @include base.absPosition(6%, 4%, none, none);
     }
   }
 
@@ -371,7 +371,7 @@ $elementWidthLong: 320px;
       padding-top: 0.3rem;
     }
     &.themeLong {
-      @include base.abs-position(none, none, 0.4rem, 1rem);
+      @include base.absPosition(none, none, 0.4rem, 1rem);
     }
     &:hover {
       cursor: pointer;

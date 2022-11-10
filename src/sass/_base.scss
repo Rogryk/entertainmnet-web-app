@@ -1,5 +1,5 @@
 //### Refactored ###
-// sizes
+/***** SIZE *****/
 $sidebar-width: 70px;
 $sidebar-height: 85vh;
 $sidebar-height-min: 270px;
@@ -28,10 +28,9 @@ $auth-button-height: 2.6rem;
 $auth-button-border-radius: 0.45rem;
 
 $play-button-diameter: 80px;
-
 $bookmark-button-diameter: 24px;
 
-// colors
+/***** COLORS *****/
 $primary-color: rgb(16, 20, 31);
 $secondary-color: rgb(22, 29, 47);
 $text-color: rgb(255, 255, 255);
@@ -43,37 +42,21 @@ $bookmark-button-checked-color: rgba(2, 255, 36, 0.8);
 $scrollbar-color: rgba(0, 0, 0, 0.4);
 $scrollbar-thumb-color: rgba(0, 0, 0, 0.8);
 
-// positioning
-$margin-top: 5vh;
+/***** POSITION *****/
+$sidebar-margin-top: 5vh;
 $sidebar-buttons-gap: 10px;
+$burgermenu-buttons-gap: 0.5rem;
 
-// effects
+/***** EFFECTS *****/
 $menu-hide-time: 1s;
 $button-hover-time: 0.35s;
 $lighten-amount: 40%;
 $darken-amount: 15%;
 
-// breakpoints
+/***** BREAKPOINTS *****/
 $phone-breakpoint: 490px;
 $tablet-breakpoint: 830px;
 $pc-breakpoint: 1430px;
-
-@mixin ease-in-out($time) {
-  transition: ease-in-out;
-  transition-duration: $time;
-}
-
-@mixin abs-center-horizontally {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -83,7 +66,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Resets
+/***** RESETS *****/
 html {
   box-sizing: border-box;
   margin: 0;
@@ -99,32 +82,19 @@ html {
 }
 
 button {
-  background-color: transparent;
   border: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
-// start old mixins file
-$marginTop: 5vh;
-$sidebarWidth: 70px;
-$sidebarHeight: 90vh;
-$sidebarMinHeight: 270px;
-
-// COLORS
-$mainBgColor: rgb(16, 20, 31);
-$sidebarBgColor: rgb(22, 29, 47);
-$buttonColor: rgba(248, 253, 254, 0.5);
-$uiRed: rgba(254, 69, 75, 0.75);
-$uiWhite: rgba(255, 255, 255, 1);
-
-@mixin abs-position($top, $right, $bottom, $left) {
+/***** MIXINS *****/
+@mixin absPosition($top, $right, $bottom, $left) {
   position: absolute;
   top: $top;
   right: $right;
   bottom: $bottom;
   left: $left;
 }
-
 @mixin absCenterVertically {
   position: absolute;
   top: 50%;
@@ -135,20 +105,17 @@ $uiWhite: rgba(255, 255, 255, 1);
   left: 50%;
   transform: translateX(-50%);
 }
-
 @mixin absCenterXY {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 @mixin flexCenter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 @mixin size-setup($width, $height) {
   height: $height;
   width: $width;
@@ -164,10 +131,8 @@ $uiWhite: rgba(255, 255, 255, 1);
   min-height: $size;
   min-width: $size;
 }
-// end of old mixins file
-
 @mixin hoverEffect($colorEffect) {
-  @include ease-in-out($button-hover-time);
+  transition: ease-in-out $button-hover-time;
   &:hover {
     @if $colorEffect == "lighten" {
       color: lighten($color: $button-white, $amount: $lighten-amount);
@@ -177,12 +142,10 @@ $uiWhite: rgba(255, 255, 255, 1);
     }
   }
 }
-
 @mixin topLeft {
   top: 0;
   left: 0;
 }
-
 @mixin circleEnlargeOnHover($enlargeAmount, $currDiameter) {
   &.position {
     &:hover {
@@ -196,81 +159,3 @@ $uiWhite: rgba(255, 255, 255, 1);
     }
   }
 }
-
-// start of burger menu defualts
-/* Position and sizing of burger button */
-.bm-burger-button {
-  position: fixed;
-  width: 36px;
-  height: 30px;
-  right: 10px;
-  top: 36px;
-  transition: ease-out 1s;
-}
-
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: darken($color: $uiWhite, $amount: 30%);
-}
-
-/* Color/shape of burger icon bars on hover*/
-.bm-burger-bars-hover {
-  background: $uiRed;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  background: darken($color: $uiWhite, $amount: 30%);
-}
-
-/*
-Sidebar wrapper styles
-Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-*/
-.bm-menu-wrap {
-  position: fixed;
-  height: 100%;
-}
-
-/* General sidebar styles */
-.bm-menu {
-  background: $sidebarBgColor;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-  width: 100%;
-}
-
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-  color: darken($color: $uiWhite, $amount: 20%);
-  padding: 0.8em;
-  position: relative;
-}
-
-/* Individual item */
-.bm-item {
-  display: inline-block;
-  a {
-    display: block;
-    padding: 0.55rem 5%;
-    width: 100%;
-    height: 100%;
-  }
-}
-
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
-}
-// end of burger menu defaults

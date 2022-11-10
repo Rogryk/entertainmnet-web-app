@@ -4,7 +4,7 @@
 .sidebarStyles {
   background: base.$secondary-color;
   button {
-    @include base.flex-center;
+    @include base.flexCenter;
     color: base.$button-white;
     margin: base.$sidebar-buttons-gap 0;
   }
@@ -18,9 +18,11 @@
 }
 
 .effects {
-  @include base.ease-in-out(base.$menu-hide-time);
+  transition: ease-in-out base.$menu-hide-time;
+
   button {
-    @include base.ease-in-out(base.$button-hover-time);
+    transition: ease-in-out base.$button-hover-time;
+
     &:hover {
       color: lighten($color: base.$button-white, $amount: base.$lighten-amount);
     }

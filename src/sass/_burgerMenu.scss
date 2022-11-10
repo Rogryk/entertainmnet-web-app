@@ -61,8 +61,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: base.$button-white;
   padding: 0.8em;
+  color: base.$button-white;
   position: relative;
 }
 
@@ -70,6 +70,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-item {
   width: 100%;
   font-size: 2rem;
+  display: flex !important;
+  padding: base.$burgermenu-buttons-gap 0;
   a {
     display: inline-grid;
     grid-template-columns: max-content max-content;
