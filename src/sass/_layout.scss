@@ -161,7 +161,7 @@ input {
 
 // ContentContainer Component
 .contentContainer {
-  padding: 0 10px;
+  padding: 0 10px 0 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -175,7 +175,7 @@ input {
   }
 
   &.dimensions {
-    width: 97%;
+    width: 100%;
     height: fit-content;
 
     @media screen and (min-width: base.$phone-breakpoint) {
