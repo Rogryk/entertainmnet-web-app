@@ -15,7 +15,7 @@ import type { IuserData } from "./store/mediaSlice";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { auth } from "./utility/initFirebase";
 import { onAuthStateChanged } from "firebase/auth";
-import Modal from "./Components/UI/LoginRegister/Modal";
+import Modal from "./Components/UI/Modal";
 import useHttp from "./hooks/useHttp";
 import { loadUserData } from "./store/mediaSlice";
 import "./sass/main.scss";
