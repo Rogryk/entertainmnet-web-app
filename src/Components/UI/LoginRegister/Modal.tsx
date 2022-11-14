@@ -47,8 +47,7 @@ const Modal = (props: AuthWindowProps) => {
             onLogin={onLogin}
             onLogout={onLogout}
             onRegister={onRegister}
-            // onBlur={onBlur}
-            onBlur={() => {}}
+            onBlur={onBlur}
           />,
           authOverlayRef
         )}
