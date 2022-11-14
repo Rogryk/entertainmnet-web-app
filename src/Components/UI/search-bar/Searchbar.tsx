@@ -1,7 +1,6 @@
 import { IconSearch } from "@tabler/icons";
-import { setSearchValue } from "../../store/navigationSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import styles from "./Searchbar.module.scss";
+import { setSearchValue } from "../../../store/navigationSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 
 interface SearchbarProps {
   isSidebarMenuHidden: boolean;
@@ -15,9 +14,9 @@ const SearchBar = (props: SearchbarProps) => {
   return (
     <section
       role="search"
-      className={`searchbar position dimensions ${position} ${styles.styles}`}
+      className={`searchbar position dimensions styles ${position} `}
     >
-      <IconSearch className={styles.icon} />
+      <IconSearch />
       <input
         type="text"
         name="searchbar"

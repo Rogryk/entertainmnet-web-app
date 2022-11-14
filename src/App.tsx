@@ -19,7 +19,7 @@ import Modal from "./Components/UI/Modal";
 import useHttp from "./hooks/useHttp";
 import { loadUserData } from "./store/mediaSlice";
 import "./sass/main.scss";
-import SearchBar from "./Components/search-bar/Searchbar";
+import SearchBar from "./Components/UI/search-bar/Searchbar";
 import ContentContainer from "./Components/Media/ContentContainer";
 
 const SUBPAGES_LIST = ["home", "categories", "movies", "tvseries", "bookmarks"];
