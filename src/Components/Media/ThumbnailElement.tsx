@@ -2,7 +2,6 @@ import React, { useState, memo } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { toggleBookmark } from "../../store/mediaSlice";
 import { IconDeviceTvOld, IconMovie } from "@tabler/icons";
-import styles from "./ThumbnailElement.module.scss";
 import BookmarkBtn from "../../UI/BookmarkBtn";
 import PlayBtn from "../../UI/PlayBtn";
 import { LazyLoadImage } from "react-lazy-load-image-component";
