@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { getAuth } from "firebase/auth";
-import type { UserCredentialsProps } from "../../../store/authSlice";
+import type { UserCredentialsProps } from "../../store/authSlice";
 import Button from "../AuthButton";
 
 interface IFormInput {

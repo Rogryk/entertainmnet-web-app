@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom";
 import Logout from "./LoginRegister/Logout";
 import AuthContainer from "./LoginRegister/AuthContainer";
-import { useAppSelector } from "../../hooks/reduxHooks";
-import type { UserCredentialsProps } from "../../store/authSlice";
+import { useAppSelector } from "../hooks/reduxHooks";
+import type { UserCredentialsProps } from "../store/authSlice";
 
 const Backdrop = () => {
   return <div className={"modalBackdrop position dimensions styles"}></div>;

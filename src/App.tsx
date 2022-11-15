@@ -15,11 +15,11 @@ import type { IuserData } from "./store/mediaSlice";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { auth } from "./utility/initFirebase";
 import { onAuthStateChanged } from "firebase/auth";
-import Modal from "./Components/UI/Modal";
+import Modal from "./UI/Modal";
 import useHttp from "./hooks/useHttp";
 import { loadUserData } from "./store/mediaSlice";
 import "./sass/main.scss";
-import SearchBar from "./Components/UI/search-bar/Searchbar";
+import SearchBar from "./UI/search-bar/Searchbar";
 import ContentContainer from "./Components/Media/ContentContainer";
 
 const SUBPAGES_LIST = ["home", "categories", "movies", "tvseries", "bookmarks"];

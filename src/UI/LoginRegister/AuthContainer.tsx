@@ -3,7 +3,7 @@ import styles from "./AuthContainer.module.scss";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import { Tabs } from "@mantine/core";
-import type { UserCredentialsProps } from "../../../store/authSlice";
+import type { UserCredentialsProps } from "../../store/authSlice";
 
 interface AuthContainerProps {
   onLogin: (userCredentials: UserCredentialsProps) => void;

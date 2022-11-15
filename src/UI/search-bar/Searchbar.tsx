@@ -1,6 +1,6 @@
 import { IconSearch } from "@tabler/icons";
-import { setSearchValue } from "../../../store/navigationSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { setSearchValue } from "../../store/navigationSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 
 interface SearchbarProps {
   isSidebarMenuHidden: boolean;
