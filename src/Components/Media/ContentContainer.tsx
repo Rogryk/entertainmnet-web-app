@@ -33,20 +33,14 @@ interface IMediaElementThumbnail {
   trending?: IMediaElementThumbnailContent;
 }
 
-interface ContentContainerProps {
-  isSidebarMenuHidden: boolean;
-}
-
 const FIREBASE_URL =
   "https://web-entertainment-app-default-rtdb.firebaseio.com/public/media.json";
 let isInitial = true;
 
-const ContentContainer = (props: ContentContainerProps) => {
+const ContentContainer = (props: { isSidebarMenuHidden: boolean }) => {
   const [contentToDisplay, setContentToDisplay] = useState<
     IMediaContentElement[] | null
   >(null);
-  const [titleToBookmark, setTitleToBookmark] = useState("");
-  const [titleToOpen, setTitleToOpen] = useState("");
 
   const dispatch = useAppDispatch();
   const mediaSel = useAppSelector((state) => state.media.media);
@@ -152,6 +146,7 @@ const ContentContainer = (props: ContentContainerProps) => {
       }
       if (!navSel.searchValue) {
         // ### HOME ###
+
         if (navSel.currentCategory === "home") {
           const tempTrending = mediaSel.filter((el) => el.isTrending === true);
           const trendingBasicInfo = createBasicInfoArray(
@@ -180,7 +175,6 @@ const ContentContainer = (props: ContentContainerProps) => {
         }
 
         // ### TV SERIES ###
-        //TODO: rewrite to switch
         if (navSel.currentCategory === "tvseries") {
           const tempTvSeries = mediaSel.filter(
             (el) => el.category === "TV Series"
