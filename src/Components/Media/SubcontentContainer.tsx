@@ -11,7 +11,6 @@ interface ISubcontentContainer {
 
 const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
   const mediaSel = useAppSelector((state) => state.media);
-  const theme = props.theme ? "theme" + props.theme : "themeShort";
 
   const checkBookmarkHandler = (title: string) => {
     return mediaSel.userData && title in mediaSel.userData.bookmarks
@@ -22,7 +21,7 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
   return (
     <div className={"subcontentContainer dimensions styles"}>
       <h2>{props.title}</h2>
-      <div className={`subcontent styles ${theme}`}>
+      <div className={`subcontent styles theme${props.theme}`}>
         {props.content &&
           props.content.map((el) => {
             return (
@@ -33,6 +32,7 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
                 rating={el.rating}
                 category={el.category}
                 isBookmarked={checkBookmarkHandler(el.title)}
+                // theme={props.theme}
                 theme={props.theme}
                 image={process.env.PUBLIC_URL + el.smallThumbnail}
               />

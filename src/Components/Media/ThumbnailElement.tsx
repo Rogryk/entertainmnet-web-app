@@ -27,8 +27,8 @@ const Element: React.FC<IElement> = (props) => {
   const descHoverHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     props.theme === "Long" ? setIsHovered(true) : setIsHovered(false);
   };
-
   const icon = props.category === "Movie" ? <IconMovie /> : <IconDeviceTvOld />;
+
   return (
     <div className={`element position ${theme}`}>
       <div
