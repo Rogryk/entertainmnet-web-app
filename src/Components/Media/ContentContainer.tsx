@@ -143,21 +143,16 @@ const ContentContainer = (props: { isSidebarMenuHidden: boolean }) => {
             content: tempSearchedBasicInfo,
           },
         ]);
-      }
-      if (!navSel.searchValue) {
+      } else {
         // ### HOME ###
-
         if (navSel.currentCategory === "home") {
-          const tempTrending = mediaSel.filter((el) => el.isTrending === true);
           const trendingBasicInfo = createBasicInfoArray(
-            tempTrending,
+            mediaSel.filter((el) => el.isTrending === true),
             "trending"
           );
-
-          const tempNotTrending = mediaSel.filter(
-            (el) => el.isTrending !== true
+          const notTrendingBasicInfo = createBasicInfoArray(
+            mediaSel.filter((el) => el.isTrending !== true)
           );
-          const notTrendingBasicInfo = createBasicInfoArray(tempNotTrending);
 
           setContentToDisplay([
             { title: "Trending", theme: "Long", content: trendingBasicInfo },
@@ -176,10 +171,9 @@ const ContentContainer = (props: { isSidebarMenuHidden: boolean }) => {
 
         // ### TV SERIES ###
         if (navSel.currentCategory === "tvseries") {
-          const tempTvSeries = mediaSel.filter(
-            (el) => el.category === "TV Series"
+          const tvSeriesBasicInfo = createBasicInfoArray(
+            mediaSel.filter((el) => el.category === "TV Series")
           );
-          const tvSeriesBasicInfo = createBasicInfoArray(tempTvSeries);
           setContentToDisplay([
             { title: "TV Series", theme: "Short", content: tvSeriesBasicInfo },
           ]);
@@ -187,8 +181,9 @@ const ContentContainer = (props: { isSidebarMenuHidden: boolean }) => {
 
         // ### MOVIES ###
         if (navSel.currentCategory === "movies") {
-          const tempMovie = mediaSel.filter((el) => el.category === "Movie");
-          const movieBasicInfo = createBasicInfoArray(tempMovie);
+          const movieBasicInfo = createBasicInfoArray(
+            mediaSel.filter((el) => el.category === "Movie")
+          );
           setContentToDisplay([
             { title: "Movies", theme: "Short", content: movieBasicInfo },
           ]);
@@ -199,22 +194,19 @@ const ContentContainer = (props: { isSidebarMenuHidden: boolean }) => {
 
   useEffect(() => {
     // ### BOOKMARKS ###
-    if (navSel.currentCategory === "bookmarks") {
-      if (!userDataSel) {
-        return;
-      }
-      const tempBookmarked = mediaSel.filter(
-        (el) => el.title in userDataSel.bookmarks
-      );
-      const bookmarkedBasicInfo = createBasicInfoArray(tempBookmarked);
-      setContentToDisplay([
-        {
-          title: "Bookmarks",
-          theme: "Short",
-          content: bookmarkedBasicInfo,
-        },
-      ]);
+    if (!(navSel.currentCategory === "bookmarks") || !userDataSel) {
+      return;
     }
+    const bookmarkedBasicInfo = createBasicInfoArray(
+      mediaSel.filter((el) => el.title in userDataSel.bookmarks)
+    );
+    setContentToDisplay([
+      {
+        title: "Bookmarks",
+        theme: "Short",
+        content: bookmarkedBasicInfo,
+      },
+    ]);
   }, [mediaSel, navSel.currentCategory, userDataSel]);
 
   return (

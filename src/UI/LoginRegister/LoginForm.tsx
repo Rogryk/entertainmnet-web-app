@@ -1,5 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { getAuth } from "firebase/auth";
+import { useForm } from "react-hook-form";
 import type { UserCredentialsProps } from "../../store/authSlice";
 import Button from "../AuthButton";
 
@@ -13,14 +12,9 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
     register,
     formState: { isSubmitted, errors },
   } = useForm<UserCredentialsProps>({ reValidateMode: "onSubmit" });
-  const auth = getAuth();
-
-  const onSubmit: SubmitHandler<UserCredentialsProps> = (UserCredentials) => {
-    onLogin(UserCredentials);
-  };
 
   return (
-    <form className={"form dimensions login"} onSubmit={handleSubmit(onSubmit)}>
+    <form className={"form dimensions login"} onSubmit={handleSubmit(onLogin)}>
       <div>
         <label>Email</label>
         <input

@@ -22,10 +22,6 @@ const SidebarMenuContainer = (props: SidebarMenuContainerProps) => {
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
 
-  const avatarClickHandler = () => {
-    !authSel.isAuthWindowOpen && dispatch(toggleAuthWindow());
-  };
-
   return (
     <>
       <nav
@@ -69,7 +65,12 @@ const SidebarMenuContainer = (props: SidebarMenuContainerProps) => {
           )}
         </div>
 
-        <button type="submit" onClick={avatarClickHandler}>
+        <button
+          type="submit"
+          onClick={() => {
+            !authSel.isAuthWindowOpen && dispatch(toggleAuthWindow());
+          }}
+        >
           <IconUserCircle stroke={2} />
         </button>
         <button

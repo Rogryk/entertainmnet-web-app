@@ -15,7 +15,7 @@ const Logout = ({ logoutHandler, onBlur }: LogoutProps) => {
   return (
     <div
       className={`logout position dimensions styles`}
-      onBlur={blurHandler}
+      onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && onBlur()}
       tabIndex={0}
     >
       <Button classList="button dimensions styles" onClick={logoutHandler}>

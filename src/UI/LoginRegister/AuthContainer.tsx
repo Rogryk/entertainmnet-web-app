@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./AuthContainer.module.scss";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
@@ -12,15 +11,10 @@ interface AuthContainerProps {
 }
 
 const AuthContainer = ({ onLogin, onRegister, onBlur }: AuthContainerProps) => {
-  const blurHandler = (e: React.FocusEvent<HTMLDivElement, Element>) => {
-    if (e.currentTarget.contains(e.relatedTarget)) return;
-    onBlur();
-  };
-
   return (
     <div
       className={`auth position dimensions ${styles.authStyles}`}
-      onBlur={blurHandler}
+      onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && onBlur()}
       tabIndex={0}
     >
       <Tabs

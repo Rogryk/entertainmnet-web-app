@@ -9,7 +9,6 @@ interface SearchbarProps {
 const SearchBar = (props: SearchbarProps) => {
   const appDispatch = useAppDispatch();
   const navSel = useAppSelector((state) => state.nav);
-
   const position = props.isSidebarMenuHidden ? "fullView" : "collapsedView";
   return (
     <section
