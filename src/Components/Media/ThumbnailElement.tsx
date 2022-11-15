@@ -30,11 +30,7 @@ const Element: React.FC<IElement> = (props) => {
   };
 
   const descHoverHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (props.theme === "Long") {
-      setIsHovered(true);
-    } else {
-      setIsHovered(false);
-    }
+    props.theme === "Long" ? setIsHovered(true) : setIsHovered(false);
   };
 
   const icon = props.category === "movie" ? <IconMovie /> : <IconDeviceTvOld />;
