@@ -59,7 +59,7 @@ const Element: React.FC<IElement> = (props) => {
         {authSel.isAuthorized && (
           <BookmarkBtn
             isBookmarked={props.isBookmarked}
-            bookmarkHandler={bookmarkClickHandler}
+            bookmarkHandler={() => dispatch(toggleBookmark(props.title))}
             classNames={"bookmarkPos"}
           />
         )}
