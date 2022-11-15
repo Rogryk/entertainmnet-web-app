@@ -33,14 +33,18 @@ function App() {
   const authSelector = useAppSelector((state) => state.auth);
   const { isLoading, error, sendRequest } = useHttp();
   let location = useLocation();
-  const navigate = useNavigate();
 
+  // add window size listener
   useEffect(() => {
     const handleResize = () => {
       window.innerWidth < 490 ? setIsPhoneWidth(true) : setIsPhoneWidth(false);
     };
     window.addEventListener("resize", handleResize);
     handleResize();
+  }, []);
+
+  // add user status change listener
+  useEffect(() => {
     auth.currentUser && loadUserDataHandler(auth.currentUser.uid);
     const subscribeUser = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -50,7 +54,7 @@ function App() {
         appDispatch(logoutHandler());
       }
     });
-    return subscribeUser;
+    subscribeUser();
   }, []);
 
   // React Router listener
@@ -61,7 +65,9 @@ function App() {
         return;
       }
       if (urlPath === "bookmarks") {
-        !authSelector.isAuthorized && navigate(`/home`);
+        !authSelector.isAuthorized
+          ? appDispatch(setCategory("home"))
+          : appDispatch(setCategory(urlPath));
       } else {
         appDispatch(setCategory(urlPath));
       }
