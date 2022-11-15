@@ -32,7 +32,6 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
                 rating={el.rating}
                 category={el.category}
                 isBookmarked={checkBookmarkHandler(el.title)}
-                // theme={props.theme}
                 theme={props.theme}
                 image={process.env.PUBLIC_URL + el.smallThumbnail}
               />
