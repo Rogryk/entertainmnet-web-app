@@ -21,19 +21,14 @@ interface IElement {
 const Element: React.FC<IElement> = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const theme = props.theme ? "theme" + props.theme : "themeShort";
-
   const dispatch = useAppDispatch();
   const authSel = useAppSelector((state) => state.auth);
-
-  const bookmarkClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(toggleBookmark(props.title));
-  };
 
   const descHoverHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     props.theme === "Long" ? setIsHovered(true) : setIsHovered(false);
   };
 
-  const icon = props.category === "movie" ? <IconMovie /> : <IconDeviceTvOld />;
+  const icon = props.category === "Movie" ? <IconMovie /> : <IconDeviceTvOld />;
   return (
     <div className={`element position ${theme}`}>
       <div
