@@ -14,14 +14,9 @@ const SubcontentContainer: React.FC<ISubcontentContainer> = (props) => {
   const theme = props.theme ? "theme" + props.theme : "themeShort";
 
   const checkBookmarkHandler = (title: string) => {
-    if (!mediaSel.userData) {
-      return false;
-    }
-    if (title in mediaSel.userData.bookmarks) {
-      return true;
-    } else {
-      return false;
-    }
+    return mediaSel.userData && title in mediaSel.userData.bookmarks
+      ? true
+      : false;
   };
 
   return (
