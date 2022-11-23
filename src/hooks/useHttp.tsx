@@ -29,14 +29,16 @@ const useHttp = () => {
         }
         const data = await response.json();
         applyData && applyData(data);
+        setIsLoading(false);
+        return data;
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message || "Something went wrong.");
         } else {
           setError("Something went wrong.");
         }
+        setIsLoading(false);
       }
-      setIsLoading(false);
     },
     []
   );
