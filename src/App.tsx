@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
 import BurgerMenu from "./Components/sidebar-menu/BurgerMenu";
 import {
@@ -118,9 +118,6 @@ function App() {
       {!authSelector.isAuthorizing && (
         <ContentContainer isSidebarMenuHidden={isSidebarHidden} />
       )}
-      {/* {!authSelector.isAuthorizing && (
-        <MediaContainer isSidebarMenuHidden={isSidebarHidden} />
-      )} */}
       {authSelector.isAuthWindowOpen && (
         <Modal
           onLogin={onLogin}
