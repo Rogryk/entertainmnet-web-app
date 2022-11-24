@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import SidebarMenuContainer from "./Components/sidebar-menu/SidebarMenuContainer";
-import BurgerMenu from "./Components/sidebar-menu/BurgerMenu";
+import SidebarMenuContainer from "./Components/SidebarMenu/SidebarMenuContainer";
+import BurgerMenu from "./Components/SidebarMenu/BurgerMenu";
 import {
   toggleAuthWindow,
   registerHandler,
