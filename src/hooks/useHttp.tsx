@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 interface IrequestConfig {
   url: string;
@@ -39,6 +39,7 @@ const useHttp = () => {
         }
         setIsLoading(false);
       }
+      return "Request failed";
     },
     []
   );
