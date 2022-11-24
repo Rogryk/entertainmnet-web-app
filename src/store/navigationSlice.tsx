@@ -18,6 +18,7 @@ const navigationSlice = createSlice({
   reducers: {
     setCategory(state, action) {
       state.currentCategory = action.payload;
+      state.searchValue = "";
     },
     setSearchValue(state, action) {
       state.searchValue = action.payload;
