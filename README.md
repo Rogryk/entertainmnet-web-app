@@ -1,15 +1,15 @@
 # About project
-#in progress: unit tests...
+*#unit tests in progress...* 
 
 Imitation of VOD App inspired by frontendmentor.io challenge, link below. 
 
-Users are able to: 
+### Users are able to: 
 - search media from search bar,
 - select categories,
 - register and login,
 - save bookmarks (only logged in users)
 
-Used technologies: 
+### Used technologies: 
 - React, Typescript,
 - Redux,
 - Router,
